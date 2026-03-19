@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rogers Innovation Scoring — 75 Safety Practices</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --bg2: #f5f4f0; --bg3: #eeecea;
+    --text: #1a1a18; --text2: #5f5e5a; --text3: #888780;
+    --border: rgba(0,0,0,0.12); --border2: rgba(0,0,0,0.22);
+    --success-bg: #eaf3de; --success-text: #3b6d11;
+    --warn-bg: #faeeda; --warn-text: #854f0b;
+    --danger-bg: #fcebeb; --danger-text: #a32d2d;
+    --info-bg: #e6f1fb; --info-text: #185fa5;
+    --radius: 8px; --radius-lg: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a18; --bg2: #242422; --bg3: #2c2c2a;
+      --text: #e8e6de; --text2: #b4b2a9; --text3: #888780;
+      --border: rgba(255,255,255,0.12); --border2: rgba(255,255,255,0.22);
+      --success-bg: #173404; --success-text: #c0dd97;
+      --warn-bg: #412402; --warn-text: #fac775;
+      --danger-bg: #501313; --danger-text: #f7c1c1;
+      --info-bg: #042c53; --info-text: #b5d4f4;
+    }
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg3); color: var(--text); padding: 24px 16px; min-height: 100vh; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
+  .dim-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; font-size: 11px; color: var(--text2); }
+  .leg-sq { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 3px; vertical-align: middle; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; align-items: center; }
+  .toolbar input, .toolbar select {
+    font-size: 12px; padding: 5px 10px;
+    border: 0.5px solid var(--border2); border-radius: var(--radius);
+    background: var(--bg); color: var(--text);
+    outline: none;
+  }
+  .toolbar input { width: 200px; }
+  .toolbar input:focus, .toolbar select:focus { border-color: var(--info-text); }
+  .count-label { font-size: 12px; color: var(--text3); margin-left: auto; }
+  .scroll-wrap { border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: auto; max-height: 600px; background: var(--bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  thead { position: sticky; top: 0; z-index: 2; }
+  th {
+    text-align: left; padding: 8px 10px;
+    font-size: 11px; font-weight: 500; color: var(--text2);
+    border-bottom: 0.5px solid var(--border2);
+    background: var(--bg); cursor: pointer; user-select: none; white-space: nowrap;
+  }
+  th:hover { color: var(--text); }
+  td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg2); }
+  .practice-name { max-width: 280px; line-height: 1.45; }
+  .score-cell { text-align: center; font-size: 11px; color: var(--text2); }
+  .composite-cell { font-weight: 500; text-align: center; font-size: 13px; }
+  .pill { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500; white-space: nowrap; display: inline-block; }
+  .pill-green { background: var(--success-bg); color: var(--success-text); }
+  .pill-amber { background: var(--warn-bg); color: var(--warn-text); }
+  .pill-red { background: var(--danger-bg); color: var(--danger-text); }
+  .cat-badge { font-size: 10px; padding: 2px 7px; border-radius: 8px; background: var(--bg2); color: var(--text3); white-space: nowrap; display: inline-block; border: 0.5px solid var(--border); }
+  .mini-bars { display: flex; gap: 3px; align-items: center; }
+  .mini-bar { display: inline-block; height: 5px; border-radius: 2px; }
+  .summary-section { margin-top: 24px; }
+  .summary-section h2 { font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 10px; }
+  .sum-row { display: flex; align-items: center; gap: 10px; margin: 5px 0; cursor: pointer; }
+  .sum-row:hover .sum-name { text-decoration: underline; }
+  .sum-name { font-size: 11px; color: var(--text); width: 300px; flex-shrink: 0; line-height: 1.35; }
+  .sum-track { flex: 1; height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .sum-fill { height: 100%; border-radius: 4px; }
+  .sum-score { font-size: 11px; font-weight: 500; color: var(--text2); min-width: 36px; text-align: right; }
+  .tier-header { font-size: 11px; font-weight: 500; color: var(--text2); margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 0.5px solid var(--border); }
+  .footer { margin-top: 20px; font-size: 11px; color: var(--text3); line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Rogers Innovation Scoring — 75 Road Safety Practices</h1>
+  <p class="subtitle">Adopter population: mid-size city DOT engineer, NC Triangle cluster, Vision Zero-exposed. Complexity score is inverted (5 = low complexity = favorable).</p>
+
+  <div class="dim-legend">
+    <span><span class="leg-sq" style="background:#1D9E75"></span>RA = Relative advantage</span>
+    <span><span class="leg-sq" style="background:#7F77DD"></span>TR = Trialability</span>
+    <span><span class="leg-sq" style="background:#D85A30"></span>OB = Observability</span>
+    <span><span class="leg-sq" style="background:#BA7517"></span>CO = Compatibility</span>
+    <span><span class="leg-sq" style="background:#E24B4A"></span>LC = Low complexity (inverted)</span>
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="Search practices..." oninput="render()">
+    <select id="catFilter" onchange="render()">
+      <option value="">All categories</option>
+      <option>Behavioral/regulatory</option>
+      <option>Vehicle technology</option>
+      <option>Speed management</option>
+      <option>Geometric/infrastructure</option>
+      <option>Signals & operations</option>
+      <option>Data & planning</option>
+      <option>Enforcement</option>
+      <option>Post-crash care</option>
+    </select>
+    <select id="tierFilter" onchange="render()">
+      <option value="">All tiers</option>
+      <option>Seed first</option>
+      <option>Seed second</option>
+      <option>Longer horizon</option>
+    </select>
+    <select id="sortCol" onchange="render()">
+      <option value="composite">Sort: composite score</option>
+      <option value="ra">Sort: relative advantage</option>
+      <option value="tr">Sort: trialability</option>
+      <option value="ob">Sort: observability</option>
+      <option value="co">Sort: compatibility</option>
+      <option value="lc">Sort: low complexity</option>
+    </select>
+    <span class="count-label" id="countLabel"></span>
+  </div>
+
+  <div class="scroll-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:280px">Practice</th>
+          <th style="width:110px">Category</th>
+          <th class="score-cell" title="Relative advantage">RA</th>
+          <th class="score-cell" title="Trialability">TR</th>
+          <th class="score-cell" title="Observability">OB</th>
+          <th class="score-cell" title="Compatibility">CO</th>
+          <th class="score-cell" title="Low complexity (inverted)">LC</th>
+          <th class="score-cell" style="width:52px">Score</th>
+          <th style="width:110px">Priority</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="summary-section">
+    <h2>Composite ranking — all practices</h2>
+    <div id="summary"></div>
+  </div>
+
+  <div class="footer">
+    <strong>Scoring rationale:</strong> Each of Rogers' five innovation attributes scored 1–5 from the perspective of a mid-size city DOT engineer in the NC Triangle Vision Zero cluster. Complexity is inverted so that 5 = easy to adopt. Maximum composite = 25. Tiers: Seed first (≥20), Seed second (15–19), Longer horizon (≤14). Source: Diffusion of Innovations framework (Rogers, 5th ed.), applied to HSRC 75-practice safety inventory. Analysis generated with Claude / Anthropic.
+  </div>
+</div>
+
+<script>
+const data=[
+["Lowering BAC limit 0.08→0.05","Behavioral/regulatory",4,3,3,3,3,16,"Seed second"],
+["Extending GDL to all novice drivers regardless of age","Behavioral/regulatory",4,3,3,3,3,16,"Seed second"],
+["Driver license renewal with on-road test every 5–10 yrs","Behavioral/regulatory",3,2,3,2,2,12,"Longer horizon"],
+["Speed governors in municipal fleet vehicles","Vehicle technology",4,5,4,4,4,21,"Seed first"],
+["Seat belt interlocks in new vehicles","Vehicle technology",4,2,3,3,2,14,"Longer horizon"],
+["Vehicle size maximums in high-ped areas","Behavioral/regulatory",4,2,3,2,2,13,"Longer horizon"],
+["Location-based speed limiters in high-ped areas","Vehicle technology",5,2,3,2,2,14,"Longer horizon"],
+["In-vehicle distraction/drowsiness recording tech","Vehicle technology",3,2,3,2,2,12,"Longer horizon"],
+["Forward/near-side sensors on heavy vehicles for peds/cyclists","Vehicle technology",5,3,4,3,3,18,"Seed second"],
+["Update NCAP to include ped detection & collision avoidance","Behavioral/regulatory",5,2,4,3,2,16,"Seed second"],
+["Speed limits based on harm minimization not 85th percentile","Speed management",5,4,4,3,3,19,"Seed first"],
+["Default 20 mph or lower in business/residential districts","Speed management",5,4,4,3,3,19,"Seed first"],
+["Alcohol ignition interlocks for all DUI convicts","Behavioral/regulatory",4,3,3,3,3,16,"Seed second"],
+["Immediate admin license revocation for DUI","Enforcement",4,3,3,3,3,16,"Seed second"],
+["Statewide universal motorcycle helmet law","Behavioral/regulatory",4,3,4,3,3,17,"Seed second"],
+["Statewide primary enforcement seatbelt law","Behavioral/regulatory",4,3,4,3,3,17,"Seed second"],
+["Speed safety cameras funding safety infrastructure","Speed management",5,5,5,4,4,23,"Seed first"],
+["Red light camera enforcement funding safety infrastructure","Enforcement",4,5,5,4,4,22,"Seed first"],
+["Leading ped intervals with right-turn-on-red restrictions","Signals & operations",5,5,5,4,5,24,"Seed first"],
+["High-visibility saturation patrols for impaired driving","Enforcement",4,4,4,4,4,20,"Seed first"],
+["Self-reporting app for near-misses/falls","Data & planning",4,5,4,4,4,21,"Seed first"],
+["Placing crashes in time/place context with news media","Data & planning",3,5,4,4,5,21,"Seed first"],
+["Linking police with EMS/hospital crash injury data","Data & planning",5,4,4,3,3,19,"Seed first"],
+["Multi-agency task force for serious crash investigation","Enforcement",4,4,4,4,3,19,"Seed first"],
+["Injury risk-based systemic safety assessments over hot spots","Data & planning",5,4,4,3,3,19,"Seed first"],
+["Routine community engagement on safety in underserved areas","Data & planning",4,5,4,4,4,21,"Seed first"],
+["Replace travel forecasting with backcasting","Data & planning",4,2,2,2,2,12,"Longer horizon"],
+["Car-free zones in high-ped activity areas","Geometric/infrastructure",4,4,4,3,3,18,"Seed second"],
+["Road safety audits in project scoping/planning phases","Data & planning",5,5,4,4,4,22,"Seed first"],
+["Simulate safety effects of land dev in long-range plans","Data & planning",4,3,3,2,2,14,"Longer horizon"],
+["Goal to reduce road deaths 50% by 2030 in safety plans","Data & planning",4,4,4,4,4,20,"Seed first"],
+["Nontraditional data sources in problem ID (EMS, SDH, redlining)","Data & planning",5,4,4,3,3,19,"Seed first"],
+["Coordinate land use and roadway purpose alignment","Data & planning",4,3,3,2,2,14,"Longer horizon"],
+["Raised crossings at driveways/minor intersections/transit stops","Geometric/infrastructure",5,5,5,4,4,23,"Seed first"],
+["Cable barriers on rural road edges","Geometric/infrastructure",4,4,4,4,4,20,"Seed first"],
+["Permanent barrier-protected bike lanes on arterials","Geometric/infrastructure",5,4,5,3,3,20,"Seed first"],
+["Cable barriers in medians of rural roads","Geometric/infrastructure",4,4,4,4,4,20,"Seed first"],
+["Self-explaining roads: narrow local, bike lanes on collectors, protected arterials","Geometric/infrastructure",5,3,4,3,2,17,"Seed second"],
+["Right-in/right-out junctions only","Geometric/infrastructure",3,3,3,3,3,15,"Seed second"],
+["Ped/bike bridges or daylit tunnels at intersections","Geometric/infrastructure",4,3,4,3,2,16,"Seed second"],
+["Road diets on multi-lane roads <20k AADT","Geometric/infrastructure",5,5,5,4,4,23,"Seed first"],
+["Converting signalized intersections to single-lane roundabouts","Geometric/infrastructure",5,4,5,3,3,20,"Seed first"],
+["Daylighting intersections (restricting corner parking)","Geometric/infrastructure",5,5,5,4,5,24,"Seed first"],
+["Default local road lane width 10 ft","Geometric/infrastructure",5,4,4,3,4,20,"Seed first"],
+["Centerline rumble strips on undivided highways","Geometric/infrastructure",4,5,4,5,5,23,"Seed first"],
+["Edge line rumble strips with bike gaps","Geometric/infrastructure",4,5,4,5,5,23,"Seed first"],
+["Breakaway poles","Geometric/infrastructure",4,5,4,5,5,23,"Seed first"],
+["Pedestrian hybrid beacons on arterials with 4+ lanes","Geometric/infrastructure",5,5,5,4,4,23,"Seed first"],
+["Employ perceptual psychologists in road design","Data & planning",4,3,3,2,2,14,"Longer horizon"],
+["Joint action plans with emergency services partners","Post-crash care",4,4,4,4,4,20,"Seed first"],
+["Traffic incident management system with clearance time tracking","Post-crash care",4,4,4,4,4,20,"Seed first"],
+["Train law enforcement and transportation on post-crash coord.","Post-crash care",4,5,4,4,4,21,"Seed first"],
+["Automatic collision notification (ACN) on remote rural roads","Post-crash care",4,3,3,3,3,16,"Seed second"],
+["Upgrade to Next Generation 911 (NG911)","Post-crash care",4,3,3,3,2,15,"Seed second"],
+["UAS for route monitoring and crash response","Post-crash care",4,3,4,3,2,16,"Seed second"],
+["ACN for collisions involving peds/cyclists/rollers","Post-crash care",5,3,4,3,3,18,"Seed second"],
+["Traffic guidance scheme (TGS) for crash events","Post-crash care",3,4,3,4,4,18,"Seed second"],
+["Network-comprehensive winter road clearance","Signals & operations",4,4,4,4,4,20,"Seed first"],
+["Extended clearance intervals for cyclists at signals","Signals & operations",5,5,5,4,5,24,"Seed first"],
+["Longer green times for cyclists at shared path crossings","Signals & operations",5,5,5,4,5,24,"Seed first"],
+["Exclusive signal phase for peds in high-volume areas (scramble)","Signals & operations",5,5,5,4,4,23,"Seed first"],
+["Extended clearance for passively detected peds at signals","Signals & operations",5,5,5,4,5,24,"Seed first"],
+["Combine passive ped detection with APS for low-vision peds","Signals & operations",5,4,4,4,4,21,"Seed first"],
+["Signal progression for emergency vehicles","Signals & operations",4,4,4,4,4,20,"Seed first"],
+["Variable speed limits in school zones","Speed management",5,5,5,4,4,23,"Seed first"],
+["Driving Safety Support Systems (DSSS)","Vehicle technology",3,2,3,2,2,12,"Longer horizon"],
+["Variable speed limits near traffic incidents","Speed management",4,4,4,4,4,20,"Seed first"],
+["Variable speed limits in adverse weather","Speed management",4,4,4,4,4,20,"Seed first"],
+["Variable speed limits at night in alcohol-serving districts","Speed management",4,4,4,3,3,18,"Seed second"],
+["Remove dangerous roadside objects (clear zone)","Geometric/infrastructure",4,5,4,4,5,22,"Seed first"],
+["Integrate asset management with crash analysis","Data & planning",5,4,4,4,4,21,"Seed first"],
+["Incorporate drainage/furniture/vegetation in asset management","Data & planning",4,4,4,4,4,20,"Seed first"],
+["Crash risk in resurfacing prioritization","Data & planning",5,5,5,4,5,24,"Seed first"],
+["Active/passive equipment maintenance and replacement system","Data & planning",4,5,4,4,4,21,"Seed first"],
+["Detailed transportation asset condition inventory","Data & planning",4,5,4,4,4,21,"Seed first"],
+];
+
+const tierColor={"Seed first":"pill-green","Seed second":"pill-amber","Longer horizon":"pill-red"};
+const barColors=["#1D9E75","#7F77DD","#D85A30","#BA7517","#E24B4A"];
+const fillColors={"Seed first":"#1D9E75","Seed second":"#BA7517","Longer horizon":"#E24B4A"};
+
+function scoreColor(s){
+  if(s>=22)return"#1D9E75";
+  if(s>=18)return"#BA7517";
+  return"#E24B4A";
+}
+
+function render(){
+  const q=document.getElementById("search").value.toLowerCase();
+  const cat=document.getElementById("catFilter").value;
+  const tier=document.getElementById("tierFilter").value;
+  const sortKey=document.getElementById("sortCol").value;
+  const keyMap={composite:7,ra:2,tr:3,ob:4,co:5,lc:6};
+  const idx=keyMap[sortKey];
+
+  let rows=data.filter(r=>{
+    if(q&&!r[0].toLowerCase().includes(q))return false;
+    if(cat&&r[1]!==cat)return false;
+    if(tier&&r[8]!==tier)return false;
+    return true;
+  }).sort((a,b)=>b[idx]-a[idx]);
+
+  document.getElementById("countLabel").textContent=rows.length+" of "+data.length+" practices";
+
+  const tbody=document.getElementById("tbody");
+  tbody.innerHTML="";
+  rows.forEach(r=>{
+    const scores=[r[2],r[3],r[4],r[5],r[6]];
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td class="practice-name">${r[0]}</td>
+      <td><span class="cat-badge">${r[1]}</span></td>
+      ${scores.map((s,i)=>`<td class="score-cell"><span title="${["RA","TR","OB","CO","LC"][i]}:${s}/5">${s}</span></td>`).join("")}
+      <td class="composite-cell" style="color:${scoreColor(r[7])}">${r[7]}</td>
+      <td><span class="pill ${tierColor[r[8]]}">${r[8]}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  const sumEl=document.getElementById("summary");
+  const allSorted=[...data].sort((a,b)=>b[7]-a[7]);
+  const tiers=["Seed first","Seed second","Longer horizon"];
+  sumEl.innerHTML="";
+  tiers.forEach(t=>{
+    const group=allSorted.filter(r=>r[8]===t);
+    if(!group.length)return;
+    sumEl.innerHTML+=`<div class="tier-header">${t} — ${group.length} practices</div>`;
+    group.forEach(r=>{
+      const pct=r[7]/25*100;
+      sumEl.innerHTML+=`<div class="sum-row">
+        <span class="sum-name">${r[0]}</span>
+        <div class="sum-track"><div class="sum-fill" style="width:${pct}%;background:${fillColors[r[8]]}"></div></div>
+        <span class="sum-score">${r[7]}/25</span>
+      </div>`;
+    });
+  });
+}
+render();
+</script>
+</body>
+</html>
