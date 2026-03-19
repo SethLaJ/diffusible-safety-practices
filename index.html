@@ -29,8 +29,18 @@
   }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg3); color: var(--text); padding: 24px 16px; min-height: 100vh; }
   .container { max-width: 1100px; margin: 0 auto; }
-  h1 { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
-  .subtitle { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
+  h1 { font-size: 20px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .byline { font-size: 12px; color: var(--text3); margin-bottom: 14px; }
+  .intro { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 18px; max-width: 820px; }
+  .intro strong { color: var(--text); font-weight: 500; }
+  .factors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 20px; }
+  .factor-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 12px; }
+  .factor-label { font-size: 11px; font-weight: 500; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+  .factor-sq { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .factor-desc { font-size: 11px; color: var(--text2); line-height: 1.5; }
+  .factor-note { font-size: 10px; color: var(--text3); margin-top: 3px; font-style: italic; }
+  .method-box { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 20px; font-size: 12px; color: var(--text2); line-height: 1.6; border-left: 3px solid #1D9E75; }
+  .method-box strong { color: var(--text); font-weight: 500; }
   .dim-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; font-size: 11px; color: var(--text2); }
   .leg-sq { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 3px; vertical-align: middle; }
   .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; align-items: center; }
@@ -81,7 +91,53 @@
 <body>
 <div class="container">
   <h1>Rogers Innovation Scoring — 75 Road Safety Practices</h1>
-  <p class="subtitle">Adopter population: mid-size city DOT engineer, NC Triangle cluster, Vision Zero-exposed. Complexity score is inverted (5 = low complexity = favorable).</p>
+  <p class="byline">Seth LaJeunesse, UNC Highway Safety Research Center &nbsp;&middot;&nbsp; Analysis developed with Claude (Anthropic)</p>
+
+  <p class="intro">
+    Why do some proven road safety practices spread quickly while others stall for decades despite strong evidence?
+    Sociologist Everett Rogers argued in his landmark work <em>Diffusion of Innovations</em> that the answer lies less
+    in the quality of the evidence and more in how practitioners <strong>perceive</strong> the practice itself.
+    This tool applies Rogers&rsquo; five adoption attributes to 75 road safety practices, scored from the perspective of
+    a mid-size city department of transportation engineer with Vision Zero exposure &mdash; the professional population
+    most strategically positioned to seed transformational safety practice in the United States.
+    Use the filters and search below to explore which practices are most diffusion-ready, and why.
+  </p>
+
+  <div class="factors-grid">
+    <div class="factor-card">
+      <div class="factor-label"><span class="factor-sq" style="background:#1D9E75"></span>Relative advantage</div>
+      <div class="factor-desc">Is this practice perceived as meaningfully better than what it replaces? The stronger the perceived benefit &mdash; in safety outcomes, liability protection, or professional recognition &mdash; the faster adoption tends to be.</div>
+    </div>
+    <div class="factor-card">
+      <div class="factor-label"><span class="factor-sq" style="background:#7F77DD"></span>Trialability</div>
+      <div class="factor-desc">Can a practitioner test this on a small scale before committing fully? Reversible pilots lower the perceived risk of adoption. Practices that require city-wide rollout from day one spread more slowly.</div>
+    </div>
+    <div class="factor-card">
+      <div class="factor-label"><span class="factor-sq" style="background:#D85A30"></span>Observability</div>
+      <div class="factor-desc">Are the results visible to peers? Practices with clear, measurable before-after outcomes that can be shared with colleagues generate social proof. Abstract or long-lag outcomes are harder to communicate.</div>
+    </div>
+    <div class="factor-card">
+      <div class="factor-label"><span class="factor-sq" style="background:#BA7517"></span>Compatibility</div>
+      <div class="factor-desc">Does this fit existing professional values, standards, and workflows? Practices that clash with AASHTO standards, require inter-agency authority, or demand a paradigm shift face steeper adoption curves.</div>
+    </div>
+    <div class="factor-card">
+      <div class="factor-label"><span class="factor-sq" style="background:#E24B4A"></span>Low complexity</div>
+      <div class="factor-desc">How easy is this to understand and implement? <em>Score is inverted</em> &mdash; a 5 means low complexity (favorable). Practices requiring new technical training, software, or multi-agency coordination score lower.</div>
+      <div class="factor-note">Only Rogers attribute where higher = simpler = easier to adopt.</div>
+    </div>
+  </div>
+
+  <div class="method-box">
+    <strong>Scoring methodology &nbsp;&middot;&nbsp;</strong>
+    Each practice is scored 1&ndash;5 on each attribute from the perspective of a mid-size city DOT engineer
+    in the NC Triangle Vision Zero cluster. Scores reflect <em>perceived</em> attributes, not objective
+    properties of the practice. Composite scores out of 25 determine priority tier:
+    <strong style="color:#3b6d11">Seed first</strong> (&ge; 20) &nbsp;&middot;&nbsp;
+    <strong style="color:#854f0b">Seed second</strong> (15&ndash;19) &nbsp;&middot;&nbsp;
+    <strong style="color:#a32d2d">Longer horizon</strong> (&le; 14).
+    Practices in the &ldquo;longer horizon&rdquo; tier are not unimportant &mdash; they require a different adopter
+    population (state legislature, NHTSA, city planners) or a longer institutional runway.
+  </div>
 
   <div class="dim-legend">
     <span><span class="leg-sq" style="background:#1D9E75"></span>RA = Relative advantage</span>
@@ -146,7 +202,10 @@
   </div>
 
   <div class="footer">
-    <strong>Scoring rationale:</strong> Each of Rogers' five innovation attributes scored 1–5 from the perspective of a mid-size city DOT engineer in the NC Triangle Vision Zero cluster. Complexity is inverted so that 5 = easy to adopt. Maximum composite = 25. Tiers: Seed first (≥20), Seed second (15–19), Longer horizon (≤14). Source: Diffusion of Innovations framework (Rogers, 5th ed.), applied to HSRC 75-practice safety inventory. Analysis generated with Claude / Anthropic.
+    Source: Rogers, E.M. (2003). <em>Diffusion of Innovations</em> (5th ed.). Free Press.
+    &nbsp;&middot;&nbsp; Practice inventory: UNC Highway Safety Research Center.
+    &nbsp;&middot;&nbsp; Analysis: Seth LaJeunesse with Claude (Anthropic), 2025.
+    &nbsp;&middot;&nbsp; <a href="https://github.com/SethLaJ/diffusible-safety-practices" style="color:#185fa5">View source on GitHub</a>
   </div>
 </div>
 
@@ -289,6 +348,10 @@ function render(){
     });
   });
 }
+render();
+</script>
+</body>
+</html>
 render();
 </script>
 </body>
