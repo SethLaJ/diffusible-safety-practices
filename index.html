@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rogers Innovation Scoring — 75 Safety Practices</title>
+<title>Rogers Diffusion Innovation Scoring — 75 Safety Practices</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -28,123 +28,156 @@
     }
   }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg3); color: var(--text); padding: 24px 16px; min-height: 100vh; }
-  .container { max-width: 1100px; margin: 0 auto; }
+  .container { max-width: 1200px; margin: 0 auto; }
   h1 { font-size: 20px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
   .byline { font-size: 12px; color: var(--text3); margin-bottom: 14px; }
-  .intro { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 18px; max-width: 820px; }
+  .intro { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 18px; max-width: 860px; }
   .intro strong { color: var(--text); font-weight: 500; }
-  .factors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 20px; }
+  .factors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 16px; }
   .factor-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 12px; }
-  .factor-label { font-size: 11px; font-weight: 500; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+  .factor-label { font-size: 11px; font-weight: 500; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; color: var(--text); }
   .factor-sq { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
   .factor-desc { font-size: 11px; color: var(--text2); line-height: 1.5; }
   .factor-note { font-size: 10px; color: var(--text3); margin-top: 3px; font-style: italic; }
-  .method-box { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 20px; font-size: 12px; color: var(--text2); line-height: 1.6; border-left: 3px solid #1D9E75; }
+  .nchrp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .nchrp-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 12px; border-left: 3px solid #185fa5; }
+  .nchrp-card .factor-label { color: #185fa5; }
+  .method-box { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 16px; font-size: 12px; color: var(--text2); line-height: 1.6; border-left: 3px solid #1D9E75; }
   .method-box strong { color: var(--text); font-weight: 500; }
   .dim-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; font-size: 11px; color: var(--text2); }
   .leg-sq { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 3px; vertical-align: middle; }
-  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; align-items: center; }
-  .toolbar input, .toolbar select {
-    font-size: 12px; padding: 5px 10px;
-    border: 0.5px solid var(--border2); border-radius: var(--radius);
-    background: var(--bg); color: var(--text);
-    outline: none;
-  }
-  .toolbar input { width: 200px; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; align-items: center; }
+  .toolbar input, .toolbar select { font-size: 12px; padding: 5px 10px; border: 0.5px solid var(--border2); border-radius: var(--radius); background: var(--bg); color: var(--text); outline: none; }
+  .toolbar input { width: 180px; }
   .toolbar input:focus, .toolbar select:focus { border-color: var(--info-text); }
   .count-label { font-size: 12px; color: var(--text3); margin-left: auto; }
+  .hint { font-size: 11px; color: var(--text3); margin-bottom: 8px; font-style: italic; }
   .scroll-wrap { border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: auto; max-height: 600px; background: var(--bg); }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
   thead { position: sticky; top: 0; z-index: 2; }
-  th {
-    text-align: left; padding: 8px 10px;
-    font-size: 11px; font-weight: 500; color: var(--text2);
-    border-bottom: 0.5px solid var(--border2);
-    background: var(--bg); cursor: pointer; user-select: none; white-space: nowrap;
-  }
-  th:hover { color: var(--text); }
-  td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; color: var(--text); }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--bg2); }
-  .practice-name { max-width: 280px; line-height: 1.45; }
+  th { text-align: left; padding: 7px 8px; font-size: 11px; font-weight: 500; color: var(--text2); border-bottom: 0.5px solid var(--border2); background: var(--bg); user-select: none; white-space: nowrap; }
+  td { padding: 6px 8px; border-bottom: 0.5px solid var(--border); vertical-align: middle; color: var(--text); }
+  tr.data-row { cursor: pointer; }
+  tr.data-row:hover td { background: var(--bg2); }
+  tr.open-row td { background: var(--info-bg) !important; }
+  tr.rationale-row td { padding: 0; border-bottom: 0.5px solid var(--border2); }
+  tr.rationale-row.hidden { display: none; }
+  .rationale-inner { padding: 12px 14px; background: var(--bg2); }
+  .rat-title { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+  .rat-sections { display: grid; grid-template-columns: 3fr 2fr; gap: 14px; }
+  @media(max-width:700px){ .rat-sections { grid-template-columns: 1fr; } }
+  .rat-rogers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+  .rat-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 8px 10px; }
+  .rat-label { font-size: 10px; font-weight: 500; display: flex; align-items: center; gap: 5px; margin-bottom: 3px; color: var(--text); }
+  .rat-score { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .rat-text { font-size: 11px; color: var(--text2); line-height: 1.45; }
+  .rat-nchrp { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 12px; border-left: 3px solid #185fa5; }
+  .rat-nchrp-title { font-size: 11px; font-weight: 500; color: #185fa5; margin-bottom: 8px; }
+  .zbar-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+  .zbar-label { font-size: 11px; color: var(--text2); width: 70px; flex-shrink: 0; }
+  .zbar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; position: relative; }
+  .zbar-center { position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: var(--border2); }
+  .zbar-fill { position: absolute; top: 0; height: 100%; border-radius: 4px; }
+  .zbar-val { font-size: 11px; font-weight: 500; min-width: 40px; text-align: right; }
+  .rat-nchrp-src { font-size: 10px; color: var(--text3); margin-top: 8px; }
+  .practice-name { max-width: 260px; line-height: 1.4; }
   .score-cell { text-align: center; font-size: 11px; color: var(--text2); }
-  .composite-cell { font-weight: 500; text-align: center; font-size: 13px; }
-  .pill { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500; white-space: nowrap; display: inline-block; }
+  .composite-cell { font-weight: 500; text-align: center; font-size: 12px; }
+  .zbar-mini { display: flex; align-items: center; gap: 4px; }
+  .zbar-mini-track { width: 50px; height: 6px; background: var(--border); border-radius: 3px; position: relative; flex-shrink: 0; }
+  .zbar-mini-center { position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: var(--border2); }
+  .zbar-mini-fill { position: absolute; top: 0; height: 100%; border-radius: 3px; }
+  .zbar-mini-val { font-size: 10px; color: var(--text2); min-width: 36px; }
+  .pill { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; white-space: nowrap; display: inline-block; }
   .pill-green { background: var(--success-bg); color: var(--success-text); }
   .pill-amber { background: var(--warn-bg); color: var(--warn-text); }
   .pill-red { background: var(--danger-bg); color: var(--danger-text); }
-  .cat-badge { font-size: 10px; padding: 2px 7px; border-radius: 8px; background: var(--bg2); color: var(--text3); white-space: nowrap; display: inline-block; border: 0.5px solid var(--border); }
-  .mini-bars { display: flex; gap: 3px; align-items: center; }
-  .mini-bar { display: inline-block; height: 5px; border-radius: 2px; }
+  .cat-badge { font-size: 10px; padding: 2px 6px; border-radius: 8px; background: var(--bg2); color: var(--text3); white-space: nowrap; display: inline-block; border: 0.5px solid var(--border); }
   .summary-section { margin-top: 24px; }
   .summary-section h2 { font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 10px; }
-  .sum-row { display: flex; align-items: center; gap: 10px; margin: 5px 0; cursor: pointer; }
-  .sum-row:hover .sum-name { text-decoration: underline; }
-  .sum-name { font-size: 11px; color: var(--text); width: 300px; flex-shrink: 0; line-height: 1.35; }
+  .sum-row { display: flex; align-items: center; gap: 10px; margin: 5px 0; }
+  .sum-name { font-size: 11px; color: var(--text); width: 280px; flex-shrink: 0; line-height: 1.35; }
   .sum-track { flex: 1; height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
   .sum-fill { height: 100%; border-radius: 4px; }
   .sum-score { font-size: 11px; font-weight: 500; color: var(--text2); min-width: 36px; text-align: right; }
   .tier-header { font-size: 11px; font-weight: 500; color: var(--text2); margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 0.5px solid var(--border); }
   .footer { margin-top: 20px; font-size: 11px; color: var(--text3); line-height: 1.6; }
+  .src-tag { font-size: 9px; padding: 1px 5px; border-radius: 4px; background: var(--info-bg); color: var(--info-text); display: inline-block; margin-left: 4px; vertical-align: middle; }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>Rogers Innovation Scoring — 75 Road Safety Practices</h1>
-  <p class="byline">Seth LaJeunesse, UNC Highway Safety Research Center &nbsp;&middot;&nbsp; Analysis developed for NCHRP 17-101 &nbsp;&middot;&nbsp; Design with Claude (Anthropic)</p>
+  <h1>Rogers Innovation Scoring &mdash; 75 Road Safety Practices</h1>
+  <p class="byline">Seth LaJeunesse, UNC Highway Safety Research Center &nbsp;&middot;&nbsp; Design developed with Claude (Anthropic)</p>
 
   <p class="intro">
     Why do some proven road safety practices spread quickly while others stall for decades despite strong evidence?
     Sociologist Everett Rogers argued in his landmark work <em>Diffusion of Innovations</em> that the answer lies less
     in the quality of the evidence and more in how practitioners <strong>perceive</strong> the practice itself.
     This tool applies Rogers&rsquo; five adoption attributes to 75 road safety practices, scored from the perspective of
-    a mid-size city department of transportation engineer with Vision Zero exposure &mdash; the professional population
-    most strategically positioned to seed transformational safety practice in the United States.
-    Use the filters and search below to explore which practices are most diffusion-ready, and why.
+    a <strong>U.S. road safety practitioner</strong> &mdash; a multi-sector population spanning transportation engineering,
+    planning, public health, law enforcement, and post-crash care.
+    It also incorporates empirical practitioner appraisals of <strong>feasibility</strong> and <strong>impact</strong>
+    drawn from the National Academies of Sciences, Engineering, and Medicine (2025), <em>NCHRP Report 1135</em>, in which professionals across these sectors
+    rated each practice on standardized scales. Where a practice was rated by multiple professional sectors,
+    scores are averaged across sectors. <strong>Click any row</strong> to see full scoring rationale and NCHRP data.
   </p>
 
   <div class="factors-grid">
     <div class="factor-card">
       <div class="factor-label"><span class="factor-sq" style="background:#1D9E75"></span>Relative advantage</div>
-      <div class="factor-desc">Is this practice perceived as meaningfully better than what it replaces? The stronger the perceived benefit &mdash; in safety outcomes, liability protection, or professional recognition &mdash; the faster adoption tends to be.</div>
+      <div class="factor-desc">Is this practice perceived as meaningfully better than what it replaces? Stronger perceived benefit — especially in professional recognition, and to a lesser extent, in safety outcomes, liability protection — accelerates adoption.</div>
     </div>
     <div class="factor-card">
       <div class="factor-label"><span class="factor-sq" style="background:#7F77DD"></span>Trialability</div>
-      <div class="factor-desc">Can a practitioner test this on a small scale before committing fully? Reversible pilots lower the perceived risk of adoption. Practices that require city-wide rollout from day one spread more slowly.</div>
+      <div class="factor-desc">Can practitioners test this on a small scale before committing fully? Reversible pilots lower perceived risk. Practices requiring system-wide rollout from day one spread more slowly.</div>
     </div>
     <div class="factor-card">
       <div class="factor-label"><span class="factor-sq" style="background:#D85A30"></span>Observability</div>
-      <div class="factor-desc">Are the results visible to peers? Practices with clear, measurable before-after outcomes that can be shared with colleagues generate social proof. Abstract or long-lag outcomes are harder to communicate.</div>
+      <div class="factor-desc">Are the results visible to peers? Clear, measurable before-after outcomes that travel through professional networks generate social proof for subsequent adopters.</div>
     </div>
     <div class="factor-card">
       <div class="factor-label"><span class="factor-sq" style="background:#BA7517"></span>Compatibility</div>
-      <div class="factor-desc">Does this fit existing professional values, standards, and workflows? Practices that clash with AASHTO standards, require inter-agency authority, or demand a paradigm shift face steeper adoption curves.</div>
+      <div class="factor-desc">Does this fit existing professional values, standards, and workflows? Practices conflicting with federal standards, requiring inter-agency authority, or demanding a paradigm shift face steeper curves.</div>
     </div>
     <div class="factor-card">
       <div class="factor-label"><span class="factor-sq" style="background:#E24B4A"></span>Low complexity</div>
-      <div class="factor-desc">How easy is this to understand and implement? <em>Score is inverted</em> &mdash; a 5 means low complexity (favorable). Practices requiring new technical training, software, or multi-agency coordination score lower.</div>
+      <div class="factor-desc">How easy is this to understand and implement? <em>Score is inverted</em> &mdash; 5 = low complexity = favorable. Practices requiring new training, software, or multi-agency coordination score lower.</div>
       <div class="factor-note">Only Rogers attribute where higher = simpler = easier to adopt.</div>
+    </div>
+  </div>
+
+  <div class="nchrp-cards">
+    <div class="nchrp-card">
+      <div class="factor-label" style="color:#185fa5"><span class="factor-sq" style="background:#185fa5"></span>NCHRP feasibility (Z-score)</div>
+      <div class="factor-desc">Standardized score from the National Academies of Sciences, Engineering, and Medicine (2025), <em>NCHRP Report 1135</em>. Practitioners rated financial, social, and political feasibility. Z &gt; 0 = above average feasibility; Z &lt; 0 = below average. Averaged across sectors where multiple groups rated the same practice.</div>
+    </div>
+    <div class="nchrp-card">
+      <div class="factor-label" style="color:#185fa5"><span class="factor-sq" style="background:#378ADD"></span>NCHRP impact (Z-score)</div>
+      <div class="factor-desc">Practitioners rated the practice&rsquo;s ability to improve safety. Z &gt; 0 = above average perceived impact; Z &lt; 0 = below average. Averaged across sectors where applicable. High feasibility + high impact = strongest diffusion candidates.</div>
     </div>
   </div>
 
   <div class="method-box">
     <strong>Scoring methodology &nbsp;&middot;&nbsp;</strong>
-    Each practice is scored 1&ndash;5 on each attribute from the perspective of a mid-size city DOT engineer
-    in the NC Triangle Vision Zero cluster. Scores reflect <em>perceived</em> attributes, not objective
-    properties of the practice. Composite scores out of 25 determine priority tier:
-    <strong style="color:#3b6d11">Seed first</strong> (&ge; 20) &nbsp;&middot;&nbsp;
-    <strong style="color:#854f0b">Seed second</strong> (15&ndash;19) &nbsp;&middot;&nbsp;
-    <strong style="color:#a32d2d">Longer horizon</strong> (&le; 14).
-    Practices in the &ldquo;longer horizon&rdquo; tier are not unimportant &mdash; they require a different adopter
-    population (state legislature, NHTSA, city planners) or a longer institutional runway.
+    Rogers attributes scored 1&ndash;5 from the perspective of a U.S. road safety practitioner (multi-sector).
+    NCHRP Z-scores are empirical practitioner ratings from <em>NCHRP Report 1135</em> (National Academies of Sciences, Engineering, and Medicine, 2025),
+    standardized within each appendix (policy, planning, design, operations, enforcement, post-crash).
+    Rogers composite out of 25 determines prioritization tier:
+    <strong style="color:#3b6d11">Prioritize first</strong> (&ge;20) &nbsp;&middot;&nbsp;
+    <strong style="color:#854f0b">Prioritize second</strong> (15&ndash;19) &nbsp;&middot;&nbsp;
+    <strong style="color:#a32d2d">Longer horizon</strong> (&le;14).
+    &ldquo;Longer horizon&rdquo; practices often require a different adopter population or institutional runway rather than being low priority.
   </div>
 
   <div class="dim-legend">
-    <span><span class="leg-sq" style="background:#1D9E75"></span>RA = Relative advantage</span>
-    <span><span class="leg-sq" style="background:#7F77DD"></span>TR = Trialability</span>
-    <span><span class="leg-sq" style="background:#D85A30"></span>OB = Observability</span>
-    <span><span class="leg-sq" style="background:#BA7517"></span>CO = Compatibility</span>
-    <span><span class="leg-sq" style="background:#E24B4A"></span>LC = Low complexity (inverted)</span>
+    <span><span class="leg-sq" style="background:#1D9E75"></span>RA</span>
+    <span><span class="leg-sq" style="background:#7F77DD"></span>TR</span>
+    <span><span class="leg-sq" style="background:#D85A30"></span>OB</span>
+    <span><span class="leg-sq" style="background:#BA7517"></span>CO</span>
+    <span><span class="leg-sq" style="background:#E24B4A"></span>LC</span>
+    <span><span class="leg-sq" style="background:#185fa5"></span>NCHRP feasibility Z</span>
+    <span><span class="leg-sq" style="background:#378ADD"></span>NCHRP impact Z</span>
   </div>
 
   <div class="toolbar">
@@ -155,41 +188,46 @@
       <option>Vehicle technology</option>
       <option>Speed management</option>
       <option>Geometric/infrastructure</option>
-      <option>Signals & operations</option>
-      <option>Data & planning</option>
+      <option>Signals &amp; operations</option>
+      <option>Data &amp; planning</option>
       <option>Enforcement</option>
       <option>Post-crash care</option>
     </select>
     <select id="tierFilter" onchange="render()">
       <option value="">All tiers</option>
-      <option>Seed first</option>
-      <option>Seed second</option>
+      <option>Prioritize first</option>
+      <option>Prioritize second</option>
       <option>Longer horizon</option>
     </select>
     <select id="sortCol" onchange="render()">
-      <option value="composite">Sort: composite score</option>
-      <option value="ra">Sort: relative advantage</option>
-      <option value="tr">Sort: trialability</option>
-      <option value="ob">Sort: observability</option>
-      <option value="co">Sort: compatibility</option>
-      <option value="lc">Sort: low complexity</option>
+      <option value="composite">Sort: Rogers composite</option>
+      <option value="0">Sort: relative advantage</option>
+      <option value="1">Sort: trialability</option>
+      <option value="2">Sort: observability</option>
+      <option value="3">Sort: compatibility</option>
+      <option value="4">Sort: low complexity</option>
+      <option value="feas">Sort: NCHRP feasibility</option>
+      <option value="impact">Sort: NCHRP impact</option>
     </select>
     <span class="count-label" id="countLabel"></span>
   </div>
+  <p class="hint">Click any row to expand scoring rationale and NCHRP practitioner data.</p>
 
   <div class="scroll-wrap">
     <table>
       <thead>
         <tr>
-          <th style="width:280px">Practice</th>
-          <th style="width:110px">Category</th>
+          <th style="width:250px">Practice</th>
+          <th style="width:100px">Category</th>
           <th class="score-cell" title="Relative advantage">RA</th>
           <th class="score-cell" title="Trialability">TR</th>
           <th class="score-cell" title="Observability">OB</th>
           <th class="score-cell" title="Compatibility">CO</th>
           <th class="score-cell" title="Low complexity (inverted)">LC</th>
-          <th class="score-cell" style="width:52px">Score</th>
-          <th style="width:110px">Priority</th>
+          <th class="score-cell" style="width:46px">Score</th>
+          <th style="width:90px">Priority</th>
+          <th style="width:110px" title="NCHRP feasibility Z-score">Feasibility</th>
+          <th style="width:110px" title="NCHRP impact Z-score">Impact</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -197,161 +235,236 @@
   </div>
 
   <div class="summary-section">
-    <h2>Composite ranking — all practices</h2>
+    <h2>Composite ranking &mdash; all practices (Rogers score)</h2>
     <div id="summary"></div>
   </div>
 
   <div class="footer">
-    Source: Rogers, E.M. (2003). <em>Diffusion of Innovations</em> (5th ed.). Free Press.
-    &nbsp;&middot;&nbsp; Practice inventory: UNC Highway Safety Research Center.
-    &nbsp;&middot;&nbsp; Analysis: Seth LaJeunesse with Claude (Anthropic), 2025.
-    &nbsp;&middot;&nbsp; <a href="https://github.com/SethLaJ/diffusible-safety-practices" style="color:#185fa5">View source on GitHub</a>
+    Rogers scores: LaJeunesse &amp; Claude (Anthropic), 2025. Adopter population: U.S. road safety practitioner (multi-sector).
+    &nbsp;&middot;&nbsp;
+    NCHRP Z-scores: National Academies of Sciences, Engineering, and Medicine. (2025). <em>A Guide to Applying the Safe System Approach to Transportation Planning, Design, and Operations.</em> Washington, DC: The National Academies Press. doi: 10.17226/29148.
+    &nbsp;&middot;&nbsp;
+    Rogers, E.M. (2003). <em>Diffusion of Innovations</em> (5th ed.). Free Press.
+    &nbsp;&middot;&nbsp;
+    <a href="https://github.com/SethLaJ/diffusible-safety-practices" style="color:#185fa5">View source on GitHub</a>
   </div>
 </div>
 
 <script>
-const data=[
-["Lowering BAC limit 0.08→0.05","Behavioral/regulatory",4,3,3,3,3,16,"Seed second"],
-["Extending GDL to all novice drivers regardless of age","Behavioral/regulatory",4,3,3,3,3,16,"Seed second"],
-["Driver license renewal with on-road test every 5–10 yrs","Behavioral/regulatory",3,2,3,2,2,12,"Longer horizon"],
-["Speed governors in municipal fleet vehicles","Vehicle technology",4,5,4,4,4,21,"Seed first"],
-["Seat belt interlocks in new vehicles","Vehicle technology",4,2,3,3,2,14,"Longer horizon"],
-["Vehicle size maximums in high-ped areas","Behavioral/regulatory",4,2,3,2,2,13,"Longer horizon"],
-["Location-based speed limiters in high-ped areas","Vehicle technology",5,2,3,2,2,14,"Longer horizon"],
-["In-vehicle distraction/drowsiness recording tech","Vehicle technology",3,2,3,2,2,12,"Longer horizon"],
-["Forward/near-side sensors on heavy vehicles for peds/cyclists","Vehicle technology",5,3,4,3,3,18,"Seed second"],
-["Update NCAP to include ped detection & collision avoidance","Behavioral/regulatory",5,2,4,3,2,16,"Seed second"],
-["Speed limits based on harm minimization not 85th percentile","Speed management",5,4,4,3,3,19,"Seed first"],
-["Default 20 mph or lower in business/residential districts","Speed management",5,4,4,3,3,19,"Seed first"],
-["Alcohol ignition interlocks for all DUI convicts","Behavioral/regulatory",4,3,3,3,3,16,"Seed second"],
-["Immediate admin license revocation for DUI","Enforcement",4,3,3,3,3,16,"Seed second"],
-["Statewide universal motorcycle helmet law","Behavioral/regulatory",4,3,4,3,3,17,"Seed second"],
-["Statewide primary enforcement seatbelt law","Behavioral/regulatory",4,3,4,3,3,17,"Seed second"],
-["Speed safety cameras funding safety infrastructure","Speed management",5,5,5,4,4,23,"Seed first"],
-["Red light camera enforcement funding safety infrastructure","Enforcement",4,5,5,4,4,22,"Seed first"],
-["Leading ped intervals with right-turn-on-red restrictions","Signals & operations",5,5,5,4,5,24,"Seed first"],
-["High-visibility saturation patrols for impaired driving","Enforcement",4,4,4,4,4,20,"Seed first"],
-["Self-reporting app for near-misses/falls","Data & planning",4,5,4,4,4,21,"Seed first"],
-["Placing crashes in time/place context with news media","Data & planning",3,5,4,4,5,21,"Seed first"],
-["Linking police with EMS/hospital crash injury data","Data & planning",5,4,4,3,3,19,"Seed first"],
-["Multi-agency task force for serious crash investigation","Enforcement",4,4,4,4,3,19,"Seed first"],
-["Injury risk-based systemic safety assessments over hot spots","Data & planning",5,4,4,3,3,19,"Seed first"],
-["Routine community engagement on safety in underserved areas","Data & planning",4,5,4,4,4,21,"Seed first"],
-["Replace travel forecasting with backcasting","Data & planning",4,2,2,2,2,12,"Longer horizon"],
-["Car-free zones in high-ped activity areas","Geometric/infrastructure",4,4,4,3,3,18,"Seed second"],
-["Road safety audits in project scoping/planning phases","Data & planning",5,5,4,4,4,22,"Seed first"],
-["Simulate safety effects of land dev in long-range plans","Data & planning",4,3,3,2,2,14,"Longer horizon"],
-["Goal to reduce road deaths 50% by 2030 in safety plans","Data & planning",4,4,4,4,4,20,"Seed first"],
-["Nontraditional data sources in problem ID (EMS, SDH, redlining)","Data & planning",5,4,4,3,3,19,"Seed first"],
-["Coordinate land use and roadway purpose alignment","Data & planning",4,3,3,2,2,14,"Longer horizon"],
-["Raised crossings at driveways/minor intersections/transit stops","Geometric/infrastructure",5,5,5,4,4,23,"Seed first"],
-["Cable barriers on rural road edges","Geometric/infrastructure",4,4,4,4,4,20,"Seed first"],
-["Permanent barrier-protected bike lanes on arterials","Geometric/infrastructure",5,4,5,3,3,20,"Seed first"],
-["Cable barriers in medians of rural roads","Geometric/infrastructure",4,4,4,4,4,20,"Seed first"],
-["Self-explaining roads: narrow local, bike lanes on collectors, protected arterials","Geometric/infrastructure",5,3,4,3,2,17,"Seed second"],
-["Right-in/right-out junctions only","Geometric/infrastructure",3,3,3,3,3,15,"Seed second"],
-["Ped/bike bridges or daylit tunnels at intersections","Geometric/infrastructure",4,3,4,3,2,16,"Seed second"],
-["Road diets on multi-lane roads <20k AADT","Geometric/infrastructure",5,5,5,4,4,23,"Seed first"],
-["Converting signalized intersections to single-lane roundabouts","Geometric/infrastructure",5,4,5,3,3,20,"Seed first"],
-["Daylighting intersections (restricting corner parking)","Geometric/infrastructure",5,5,5,4,5,24,"Seed first"],
-["Default local road lane width 10 ft","Geometric/infrastructure",5,4,4,3,4,20,"Seed first"],
-["Centerline rumble strips on undivided highways","Geometric/infrastructure",4,5,4,5,5,23,"Seed first"],
-["Edge line rumble strips with bike gaps","Geometric/infrastructure",4,5,4,5,5,23,"Seed first"],
-["Breakaway poles","Geometric/infrastructure",4,5,4,5,5,23,"Seed first"],
-["Pedestrian hybrid beacons on arterials with 4+ lanes","Geometric/infrastructure",5,5,5,4,4,23,"Seed first"],
-["Employ perceptual psychologists in road design","Data & planning",4,3,3,2,2,14,"Longer horizon"],
-["Joint action plans with emergency services partners","Post-crash care",4,4,4,4,4,20,"Seed first"],
-["Traffic incident management system with clearance time tracking","Post-crash care",4,4,4,4,4,20,"Seed first"],
-["Train law enforcement and transportation on post-crash coord.","Post-crash care",4,5,4,4,4,21,"Seed first"],
-["Automatic collision notification (ACN) on remote rural roads","Post-crash care",4,3,3,3,3,16,"Seed second"],
-["Upgrade to Next Generation 911 (NG911)","Post-crash care",4,3,3,3,2,15,"Seed second"],
-["UAS for route monitoring and crash response","Post-crash care",4,3,4,3,2,16,"Seed second"],
-["ACN for collisions involving peds/cyclists/rollers","Post-crash care",5,3,4,3,3,18,"Seed second"],
-["Traffic guidance scheme (TGS) for crash events","Post-crash care",3,4,3,4,4,18,"Seed second"],
-["Network-comprehensive winter road clearance","Signals & operations",4,4,4,4,4,20,"Seed first"],
-["Extended clearance intervals for cyclists at signals","Signals & operations",5,5,5,4,5,24,"Seed first"],
-["Longer green times for cyclists at shared path crossings","Signals & operations",5,5,5,4,5,24,"Seed first"],
-["Exclusive signal phase for peds in high-volume areas (scramble)","Signals & operations",5,5,5,4,4,23,"Seed first"],
-["Extended clearance for passively detected peds at signals","Signals & operations",5,5,5,4,5,24,"Seed first"],
-["Combine passive ped detection with APS for low-vision peds","Signals & operations",5,4,4,4,4,21,"Seed first"],
-["Signal progression for emergency vehicles","Signals & operations",4,4,4,4,4,20,"Seed first"],
-["Variable speed limits in school zones","Speed management",5,5,5,4,4,23,"Seed first"],
-["Driving Safety Support Systems (DSSS)","Vehicle technology",3,2,3,2,2,12,"Longer horizon"],
-["Variable speed limits near traffic incidents","Speed management",4,4,4,4,4,20,"Seed first"],
-["Variable speed limits in adverse weather","Speed management",4,4,4,4,4,20,"Seed first"],
-["Variable speed limits at night in alcohol-serving districts","Speed management",4,4,4,3,3,18,"Seed second"],
-["Remove dangerous roadside objects (clear zone)","Geometric/infrastructure",4,5,4,4,5,22,"Seed first"],
-["Integrate asset management with crash analysis","Data & planning",5,4,4,4,4,21,"Seed first"],
-["Incorporate drainage/furniture/vegetation in asset management","Data & planning",4,4,4,4,4,20,"Seed first"],
-["Crash risk in resurfacing prioritization","Data & planning",5,5,5,4,5,24,"Seed first"],
-["Active/passive equipment maintenance and replacement system","Data & planning",4,5,4,4,4,21,"Seed first"],
-["Detailed transportation asset condition inventory","Data & planning",4,5,4,4,4,21,"Seed first"],
-];
+const DC=["#1D9E75","#7F77DD","#D85A30","#BA7517","#E24B4A"];
+const DN=["Relative advantage","Trialability","Observability","Compatibility","Low complexity"];
 
-const tierColor={"Seed first":"pill-green","Seed second":"pill-amber","Longer horizon":"pill-red"};
-const barColors=["#1D9E75","#7F77DD","#D85A30","#BA7517","#E24B4A"];
-const fillColors={"Seed first":"#1D9E75","Seed second":"#BA7517","Longer horizon":"#E24B4A"};
+const tierColor={"Prioritize first":"pill-green","Prioritize second":"pill-amber","Longer horizon":"pill-red"};
+const fillColors={"Prioritize first":"#1D9E75","Prioritize second":"#BA7517","Longer horizon":"#E24B4A"};
 
-function scoreColor(s){
-  if(s>=22)return"#1D9E75";
-  if(s>=18)return"#BA7517";
-  return"#E24B4A";
+function scoreColor(s){ return s>=20?"#1D9E75":s>=15?"#BA7517":"#E24B4A"; }
+function total(r){ return r.s.reduce((a,b)=>a+b,0); }
+
+// zbar: render a mini z-score bar for table cells
+function zbarMini(z, color){
+  if(z===null) return `<span style="font-size:10px;color:var(--text3)">n/a</span>`;
+  const pct = Math.min(Math.abs(z)/2, 1)*50; // max 2SD = full half
+  const left = z>=0 ? 50 : 50-pct;
+  const label = z>=0 ? "+"+z.toFixed(2) : z.toFixed(2);
+  const textColor = z>=0 ? "#3b6d11" : "#a32d2d";
+  return `<div class="zbar-mini">
+    <div class="zbar-mini-track">
+      <div class="zbar-mini-center"></div>
+      <div class="zbar-mini-fill" style="left:${left}%;width:${pct}%;background:${color}"></div>
+    </div>
+    <span class="zbar-mini-val" style="color:${textColor}">${label}</span>
+  </div>`;
 }
+
+// Full z-bar for rationale drawer
+function zbarFull(z, label, color){
+  if(z===null) return `<div class="zbar-row"><span class="zbar-label">${label}</span><span style="font-size:11px;color:var(--text3)">not rated</span></div>`;
+  const pct = Math.min(Math.abs(z)/2, 1)*50;
+  const left = z>=0 ? 50 : 50-pct;
+  const textColor = z>=0 ? "#3b6d11" : "#a32d2d";
+  const cat = z>1?"High":z>0?"Moderate":z>-1?"Low":"Very Low";
+  return `<div class="zbar-row">
+    <span class="zbar-label">${label}</span>
+    <div class="zbar-track">
+      <div class="zbar-center"></div>
+      <div class="zbar-fill" style="left:${left}%;width:${pct}%;background:${color}"></div>
+    </div>
+    <span class="zbar-val" style="color:${textColor}">${z>=0?"+":""}${z.toFixed(3)} (${cat})</span>
+  </div>`;
+}
+
+const data=[
+// [name, cat, [RA,TR,OB,CO,LC], tier, feas_z, impact_z, nchrp_src, [rationale x5]]
+// --- BEHAVIORAL/REGULATORY ---
+["Lowering BAC limit 0.08\u20190.05","Behavioral/regulatory",[3,2,3,2,2],"Longer horizon",-0.146,-0.463,"Policy (A)",["Strong international evidence but U.S. practitioners perceive this as politically infeasible at present; the NCHRP data confirm below-average impact perception, possibly because practitioners see impaired driving as already over-addressed relative to infrastructure.","State legislative action required across all 50 states; no sub-state pilot pathway exists.","Crash attribution to BAC threshold change specifically is difficult amid other confounders; multi-year lag before outcomes stabilize.","Conflicts with entrenched U.S. 0.08 norm and faces well-organized industry opposition; low perceived compatibility with current political environment.","Requires coordinated legislative campaigns in every state simultaneously; far beyond practitioner agency capacity."]],
+["Extending GDL to all novice drivers regardless of age","Behavioral/regulatory",[3,2,3,2,2],"Longer horizon",0.136,-0.258,"Policy (A)",["Evidence for older novice drivers is thinner than for young drivers; practitioners recognize the logic but the evidence base is weaker, reflected in below-average NCHRP impact score.","State DMV and legislative action only; no agency-level trial option.","Crash rate changes for older novice drivers would take years to observe and require careful confounding controls.","Challenges adult autonomy norms; moderate professional support but significant public opposition anticipated.","Multi-agency state legislative process; beyond practitioner scope."]],
+["Driver license renewal with on-road test every 5\u201310 yrs","Behavioral/regulatory",[2,1,2,2,2],"Longer horizon",-0.477,-0.295,"Policy (A)",["Evidence of crash reduction from renewal testing is limited; NCHRP practitioners rated this below average on both feasibility and impact.","No sub-state pilot pathway; purely a state DMV and legislative matter.","Outcomes would lag years behind policy change with difficult attribution.","Conflicts with licensure-as-right norms; significant voter and political opposition.","Requires new DMV infrastructure and legal changes in every state."]],
+["Speed governors in municipal fleet vehicles","Vehicle technology",[4,5,4,4,4],"Prioritize first",0.592,-0.712,"Policy (A)",["City liability reduction is a compelling advantage; practitioners directly control fleet procurement. NCHRP feasibility is above average but impact is rated low, suggesting practitioners see it as easy to do but limited in population-level effect.","City can pilot on a subset of fleet vehicles with no external approval required.","Telematics data makes speed behavior directly observable; incidents involving fleet vehicles are tracked.","Aligns with fleet risk management culture; no external standards conflict.","Technically and administratively managed within existing fleet programs."]],
+["Seat belt interlocks in new vehicles","Vehicle technology",[4,2,3,3,2],"Longer horizon",-0.055,0.150,"Policy (A)",["High perceived safety value but NCHRP practitioners rated feasibility slightly below average; federal rulemaking dependency is the binding constraint.","Requires NHTSA rulemaking and OEM compliance; no practitioner-level pilot exists.","Population-level seatbelt use rates shift slowly; national rather than local measurement.","Philosophically consistent with Safe System but faces industry and autonomy opposition.","Multi-year federal regulatory process outside any practitioner agency's scope."]],
+["Vehicle size maximums in high-ped areas","Behavioral/regulatory",[4,2,3,2,2],"Longer horizon",-0.666,-0.486,"Policy (A)",["Mechanistically clear advantage for pedestrian safety but NCHRP practitioners rated both feasibility and impact below average; commercial trucking conflicts dominate the perception.","Requires state or federal ordinance; city engineers cannot unilaterally restrict vehicle dimensions.","Compliance monitoring would require new enforcement infrastructure.","Conflicts with trucking industry norms and federal vehicle standards.","Legally complex multi-jurisdictional coordination required."]],
+["Location-based speed limiters in high-ped areas","Vehicle technology",[5,2,3,2,2],"Longer horizon",-0.796,0.080,"Policy (A)",["Very high relative advantage on safety physics; NCHRP practitioners rate impact as moderate but feasibility very low, consistent with federal rulemaking dependency.","Technology exists (ISA) but requiring it in private vehicles requires federal mandate; no city-level pilot for private vehicles.","Speed reduction in target zones measurable but only accessible post-federal action.","Conflicts with driver autonomy norms and current vehicle regulations.","Requires automotive industry cooperation, GPS infrastructure, and federal authority."]],
+["In-vehicle distraction/drowsiness recording tech","Vehicle technology",[3,2,3,2,2],"Longer horizon",-0.788,-0.133,"Policy (A)",["Practitioners rate both feasibility and impact below average; privacy concerns dominate the compatibility calculation even among safety professionals.","Fleet application possible but private vehicle requirement is federal territory.","Privacy constraints limit data sharing and public visibility of outcomes.","Strong privacy conflict; autonomy opposition from public and industry.","High legal and ethical complexity for general application."]],
+["Forward/near-side sensors on heavy vehicles for peds/cyclists","Vehicle technology",[5,3,4,3,3],"Prioritize second",0.337,0.324,"Policy (A)",["NCHRP practitioners rate both feasibility and impact above average; heavy vehicle blind spots are a recognized lethal mechanism with growing regulatory momentum (NYC precedent).","City fleet and contract requirements are achievable; broader mandate needs state/federal action.","Near-miss and incident data from sensor-equipped vehicles is trackable.","Aligns with Vision Zero values; precedent from large cities building.","Commercially available technology; city fleet implementation is manageable."]],
+["Update NCAP to include ped detection & collision avoidance","Behavioral/regulatory",[5,2,4,3,2],"Prioritize second",0.604,0.403,"Policy (A)",["NCHRP practitioners rate feasibility and impact both above average; NCAP rating leverage over market is well understood by practitioners.","Requires NHTSA action only; practitioners cannot pilot but can advocate effectively.","Consumer rating adoption rates and AEB penetration are publicly trackable.","Aligns with Safe System vehicle pillar; NHTSA historically receptive.","Federal scope only; practitioner role is advocacy, not implementation."]],
+["Speed limits based on harm minimization not 85th percentile","Speed management",[5,4,4,3,3],"Prioritize first",0.290,0.097,"Policy (A)",["NCHRP feasibility is above average; impact is rated near the mean — practitioners understand the advantage but recognize political resistance. The 85th percentile rule is the primary structural obstacle to safer limits.","Pilot corridors exist; analytical approach can be applied incrementally before full adoption.","Before-after speed and crash data on lowered-limit corridors is available from peer cities.","Conflicts with standard MUTCD methodology; requires political cover but FHWA Safe System framing helps.","Conceptually accessible but requires changing entrenched professional methodology."]],
+["Default 20 mph or lower in business/residential districts","Speed management",[5,4,4,3,3],"Prioritize first",-0.062,-0.271,"Policy (A)",["Strong international evidence base; NCHRP practitioners rate both feasibility and impact slightly below average — the U.S. political context suppresses perception even among safety professionals.","District-level pilots exist in several U.S. cities; some have pursued lower limits in downtown areas.","Speed compliance via spot studies measurable; crash severity observable over 1-2 years.","Conflicts with 85th percentile methodology and driver norms; FHWA Safe System guidance helps.","Requires state authorization for arterials in many states; local streets are more tractable."]],
+["Alcohol ignition interlocks for all DUI convicts","Behavioral/regulatory",[4,2,3,3,3],"Prioritize second",0.268,0.350,"Policy (A) + Enforcement (E)",["NCHRP practitioners across policy and enforcement sectors rate both feasibility and impact above average (averaged); strong evidence of repeat DUI crash reduction.","State courts and DMV control; practitioners can advocate through safety coalitions but not implement directly.","Recidivism and DUI crash rates trackable through administrative data.","Aligns with law enforcement and judicial partners; Safe System compatible.","Well-established in many states; administratively manageable at court/DMV level."]],
+["Immediate admin license revocation for DUI","Enforcement",[4,3,4,3,3],"Prioritize second",-0.043,0.169,"Policy (A) + Enforcement (E)",["NCHRP averaging across policy and enforcement sectors yields slightly below-average feasibility but above-average impact; immediate removal of impaired drivers has clear safety logic.","State legislative and judicial process; city practitioners cannot pilot directly.","License revocation rates and DUI crash involvement trackable through DMV data.","Consistent with enforcement culture; some due process tension in legal community.","Many states already have ALR laws; administratively manageable where political will exists."]],
+["Statewide universal motorcycle helmet law","Behavioral/regulatory",[4,3,4,3,3],"Prioritize second",0.008,0.187,"Policy (A) + Enforcement (E)",["NCHRP averaged across sectors shows near-zero feasibility and slightly above-average impact; politically contested despite strong evidence.","State legislative action required; no sub-state pilot pathway.","Helmet use rates and motorcyclist fatality trends directly observable and attributable.","Strong evidence base but organized motorcyclist opposition is a persistent barrier.","Legislatively and operationally manageable where political will exists."]],
+["Statewide primary enforcement seatbelt law","Behavioral/regulatory",[4,3,4,3,3],"Prioritize second",0.186,0.302,"Policy (A) + Enforcement (E)",["NCHRP practitioners averaged across sectors rate feasibility and impact both above average; primary enforcement has strong evidence and growing political acceptability.","State legislative action required; some states currently have secondary enforcement for rear seats.","Seatbelt use rates via observation studies directly observable; fatality data responds within 1-2 years.","Aligns with safety culture; some law enforcement resistance to expanded stop authority.","Politically achievable where momentum exists; operationally manageable."]],
+["Speed safety cameras funding safety infrastructure","Speed management",[5,5,5,4,4],"Prioritize first",-0.215,0.199,"Policy (A) + Enforcement (E)",["NCHRP averaged across policy and enforcement sectors shows below-average feasibility but above-average impact — political resistance dominates the feasibility perception even as practitioners recognize the safety value. Revenue-to-safety linkage improves palatability.","Single corridor or school zone pilots are common and reversible.","Speed compliance before/after is immediately measurable; crash data accumulates within 1-2 years.","Growing FHWA and Vision Zero endorsement; revenue model improves political cover.","Established vendor ecosystem; procurement manageable for any city DOT."]],
+["Red light camera enforcement funding safety infrastructure","Enforcement",[4,5,5,4,4],"Prioritize second",-0.134,-0.018,"Policy (A) + Enforcement (E)",["NCHRP practitioners averaged across sectors rate both feasibility and impact slightly below average — political opposition drives down feasibility perception despite good evidence. Revenue-to-infrastructure framing helps.","Single intersection pilots are common; phased rollout standard practice.","Violation rates and crash data directly observable; public-facing data.","FHWA endorsed; revenue model supports political palatability.","Vendor-managed systems reduce administrative burden."]],
+["Leading ped intervals with right-turn-on-red restrictions","Signals & operations",[5,5,5,4,5],"Prioritize first",0.914,0.465,"Policy (A) + Operations (D)",["NCHRP practitioners across policy and operations sectors rate feasibility very high and impact above average; this is the top-scoring practice in the dataset on combined feasibility. Evidence is strong, implementation is trivial.","Single intersection timing change; zero capital cost; immediately reversible.","Pedestrian-vehicle conflicts directly countable before and after.","MUTCD compliant; FHWA proven countermeasure; no standards conflict.","Signal timing adjustment only; no construction or capital investment required."]],
+["High-visibility saturation patrols for impaired driving","Enforcement",[4,4,4,4,4],"Prioritize first",0.157,0.287,"Enforcement (E)",["NCHRP enforcement practitioners rate both feasibility and impact above average; DUI deterrence through visibility is well understood in the enforcement community.","Deployable on specific corridors or time windows; naturally bounded by budget.","DUI arrest rates and crash data on treated corridors directly trackable.","Aligns with enforcement culture; fits naturally into SHSP enforcement programs.","Operationally straightforward; inter-agency coordination but no new technology."]],
+["Self-reporting app for near-misses/falls","Data & planning",[4,5,4,4,4],"Prioritize first",-0.023,-0.672,"Planning (B) + Enforcement (E) + Post-crash (F)",["NCHRP practitioners averaged across three sectors rate feasibility near average but impact markedly below average — practitioners are skeptical of near-miss data quality and representativeness despite the conceptual appeal of capturing sub-crash events.","App can be piloted in a single neighborhood with minimal investment.","Spatial clustering of reported events visible on a map; community engagement value observable.","Consistent with data-driven planning values; aligns with community engagement norms.","App deployment and visualization manageable with existing GIS capacity."]],
+["Placing crashes in time/place context with news media","Data & planning",[4,5,4,4,5],"Prioritize first",0.303,-0.345,"Enforcement (E) + Post-crash (F)",["NCHRP averaged across enforcement and post-crash sectors: above-average feasibility but below-average impact — practitioners see this as easy to do but not a high-leverage safety intervention per se; its value is in shifting public and political discourse.","Any individual crash can be contextualized immediately; no infrastructure required.","Media pickup and political discourse shifts observable qualitatively.","Aligns with Vision Zero communication norms; widely practiced in peer cities.","Requires only a communication protocol and media relationships; no technical complexity."]],
+["Linking police with EMS/hospital crash injury data","Data & planning",[5,4,4,3,3],"Prioritize first",-0.063,-0.068,"Enforcement (E) + Post-crash (F)",["NCHRP practitioners averaged across enforcement and post-crash sectors rate both feasibility and impact slightly below average — data governance friction and HIPAA concerns suppress feasibility perception even though the relative advantage is clear to analysts.","Linkage pilots can begin with a single hospital or EMS agency; incremental expansion feasible.","Improvement in injury classification accuracy measurable by comparing linked vs. unlinked records.","Inter-agency data sharing agreements required; HIPAA tension creates friction with health partners.","Data governance and linkage infrastructure require investment; technically feasible but administratively demanding."]],
+["Multi-agency task force for serious crash investigation","Enforcement",[4,4,4,4,3],"Prioritize first",0.039,0.086,"Enforcement (E) + Post-crash (F)",["NCHRP averaged across enforcement and post-crash sectors shows near-average feasibility and impact; cross-sector task forces are understood to be valuable but perceived as resource-intensive.","A task force can be convened after a single crash to pilot the model before formalizing.","Task force findings and subsequent infrastructure changes at crash locations observable.","Aligns with Vision Zero multidisciplinary ethos; growing FHWA endorsement.","Requires inter-agency coordination and sustained commitment; more complex than single-agency investigation."]],
+["Injury risk-based systemic safety assessments over hot spots","Data & planning",[5,4,4,4,3],"Prioritize first",0.225,0.417,"Planning (B)",["NCHRP planning practitioners rate feasibility and impact both above average; systemic approaches are gaining recognition as the evidence-based alternative to reactive hot-spot programs.","Can be applied to a specific road type as a bounded pilot before system-wide rollout.","Risk scores for treated locations compared to untreated controls; crash outcomes observable over 2-3 years.","FHWA actively promotes systemic safety in HSIP guidance; aligns with Safe System approach.","Requires GIS capacity and a risk scoring methodology; accessible for DOTs with basic analytical staff."]],
+["Routine community engagement on safety in underserved areas","Data & planning",[4,5,4,4,4],"Prioritize first",0.402,0.225,"Planning (B)",["NCHRP planning practitioners rate feasibility above average and impact above average; community engagement is well aligned with SS4A equity requirements and growing practitioner norms.","Can begin with a single neighborhood; pop-up events and surveys are low-cost and scalable.","Community-identified hazards that receive treatment and show crash reduction are observable.","Aligns with SS4A equity commitments and Vision Zero frameworks.","Operationally manageable with existing outreach staff; modest investment for meaningful return."]],
+["Replace travel forecasting with backcasting","Data & planning",[3,1,2,1,1],"Longer horizon",-0.294,-0.257,"Planning (B)",["NCHRP planning practitioners rate both feasibility and impact below average — this practice is understood as paradigm-level change that requires institutional transformation beyond individual practitioner capacity.","No meaningful pilot within existing transportation planning processes; requires MPO-level methodology change.","Outcomes of a backcasting approach would take decades to observe at the system level.","Conflicts fundamentally with standard travel demand modeling embedded in FHWA/AASHTO requirements.","Paradigm-level change requiring new planning frameworks, models, and political consensus."]],
+["Car-free zones in high-ped activity areas","Geometric/infrastructure",[4,4,4,3,3],"Prioritize second",-0.702,0.370,"Planning (B)",["NCHRP planning practitioners rate feasibility well below average but impact above average — a classic high-potential/high-resistance practice where the vision is compelling but political and access friction dominates.","Temporary car-free events and tactical urbanism pilots are common; permanent zones need political consensus.","Pedestrian volumes, crash rates, and economic outcomes in treated areas measurable.","Growing acceptance through placemaking framing; conflict with parking and access norms persists.","Temporary implementations low-cost; permanent zones require enforcement infrastructure."]],
+["Road safety audits in project scoping/planning phases","Data & planning",[5,5,4,4,4],"Prioritize first",0.724,0.302,"Planning (B)",["NCHRP planning practitioners rate feasibility high and impact above average; RSAs are a well-established, FHWA-endorsed practice with a clear process and measurable return.","Can be piloted on a single project type before becoming standard practice.","Audit findings and proportion addressed in final designs are trackable; long-term crash outcomes observable.","FHWA proven countermeasure; aligns with systematic engineering process values.","Audit methodology well documented; requires trained reviewers but no new technology."]],
+["Simulate safety effects of land dev in long-range plans","Data & planning",[4,3,3,2,2],"Longer horizon",-0.233,-0.019,"Planning (B)",["NCHRP practitioners rate both feasibility and impact near zero — the practice is recognized as valuable but perceived as technically and institutionally out of reach for most agencies.","Modeling tools exist but piloting requires MPO capacity most mid-size agencies lack.","Simulated outcomes not directly observable; validation against crash data takes decades.","Requires cross-agency coordination between transportation and land use planners.","Technically demanding; specialized modeling software and cross-disciplinary expertise required."]],
+["Goal to reduce road deaths 50% by 2030 in safety plans","Data & planning",[4,4,4,4,4],"Prioritize first",0.071,-0.532,"Planning (B)",["NCHRP planning practitioners rate feasibility near average but impact significantly below average — the goal-setting is seen as easy but not itself a safety intervention; the gap between commitment and action is well understood by practitioners.","Can be adopted in any safety plan update without infrastructure investment.","Annual progress reports immediately publishable; peer city comparisons visible.","Consistent with NRSS, Vision Zero, and SS4A framing; increasingly expected by federal funders.","Requires only a policy decision and reporting infrastructure; no technical complexity."]],
+["Nontraditional data sources in problem ID (EMS, SDH, redlining)","Data & planning",[5,4,4,3,3],"Prioritize first",-0.307,-0.012,"Planning (B)",["NCHRP planning practitioners rate both feasibility and impact near zero or slightly below — data governance and integration complexity suppress feasibility even though the relative advantage for equity-focused planning is high.","Can be piloted with a single supplemental data source before full integration.","Locations identified through enriched data that receive treatment and improve are observable.","Aligns with SS4A equity requirements; data sharing agreements add friction with health agencies.","Not technically difficult but requires relationship-building across agencies."]],
+["Coordinate land use and roadway purpose alignment","Data & planning",[4,3,3,2,2],"Longer horizon",0.052,0.257,"Planning (B)",["NCHRP planning practitioners rate feasibility near average and impact above average — the value is recognized but requires inter-departmental coordination that rarely exists in practice.","Requires joint decision-making between transportation and planning departments that rarely share authority.","Outcomes emerge over years through development review decisions; not short-term observable.","Conflicts with siloed departmental structures and existing zoning/road classification systems.","Requires organizational change across multiple departments; no single practitioner can implement unilaterally."]],
+["Raised crossings at driveways/minor intersections/transit stops","Geometric/infrastructure",[5,5,5,4,4],"Prioritize first",-0.364,-0.073,"Design (C)",["NCHRP design practitioners rate feasibility below average and impact near zero — perhaps surprising given the evidence, but U.S. practitioners perceive material and specification unfamiliarity as a barrier. Evidence from European practice is strong.","Can be installed at a single driveway or transit stop as a low-cost pilot; quick-build materials available.","Vehicle speeds and pedestrian-vehicle conflicts at treated locations countable before and after.","NACTO and FHWA endorsed; consistent with Complete Streets values; no standards conflict on local roads.","Straightforward to design and construct with standard materials."]],
+["Cable barriers on rural road edges","Geometric/infrastructure",[4,4,4,4,4],"Prioritize first",-0.114,-0.081,"Design (C)",["NCHRP design practitioners rate both feasibility and impact slightly below average — the practice is well established on interstates but practitioners perceive cost and procurement friction on lower-classified rural roads.","Single rural corridor segment installation is a standalone project type.","Before-after run-off-road crash data on treated segments straightforward to collect.","AASHTO and FHWA proven countermeasure; consistent with existing standards.","Established technology with clear specifications; routine for state and county road engineers."]],
+["Permanent barrier-protected bike lanes on arterials","Geometric/infrastructure",[5,4,5,3,3],"Prioritize first",-0.869,0.280,"Design (C)",["NCHRP design practitioners rate feasibility well below average but impact above average — a pattern of high aspiration/high resistance. Practitioners see strong safety value but arterial jurisdiction conflicts and design exception burden suppress feasibility.","Quick-build flex post implementations allow piloting before permanent construction.","Cyclist volumes and conflict rates measurable; crash data accumulates within 1-2 years.","NACTO-endorsed but may conflict with state DOT jurisdiction on arterials; requires design exception on some road types.","Flex post installations are low-cost; permanent barriers require standard capital process."]],
+["Cable barriers in medians of rural roads","Geometric/infrastructure",[4,4,4,4,4],"Prioritize first",0.223,-0.206,"Design (C)",["NCHRP design practitioners rate feasibility above average but impact below average — the practice is seen as implementable but head-on crash risk may be underweighted in practitioners' mental models.","Single corridor installations standard; phased installation by segment is common.","Head-on crash elimination on treated segments directly measurable.","AASHTO proven countermeasure; consistent with design standards; routine for rural programs.","Established technology with clear design guidance."]],
+["Self-explaining roads: narrow local, bike lanes on collectors, protected arterials","Geometric/infrastructure",[5,3,4,3,2],"Prioritize second",-1.142,0.196,"Design (C)",["NCHRP design practitioners rate feasibility very low but impact above average — the strongest aspiration/feasibility gap in the dataset. Practitioners understand the conceptual advantage but the systemic nature of the change and AASHTO conflicts make it feel unreachable.","Implementing the full typology requires system-level commitment; individual elements can be piloted.","Individual elements have measurable outcomes; system-level legibility effect harder to isolate.","Conflicts with AASHTO on lane widths for arterials; NACTO provides partial cover.","Full typology requires design manual revision, state DOT negotiation, and sustained political commitment."]],
+["Right-in/right-out junctions only","Geometric/infrastructure",[3,3,3,3,3],"Prioritize second",0.161,0.064,"Design (C)",["NCHRP design practitioners rate both feasibility and impact near average; the practice is understood but perceived benefits are modest and business opposition is a reliable friction point.","Can be implemented at individual driveways or access points on new or redeveloped corridors.","Before-after conflict data at treated access points measurable; driver adaptation takes time.","Consistent with access management principles endorsed by FHWA and AASHTO.","Requires physical channelization and signage; generates community opposition."]],
+["Ped/bike bridges or daylit tunnels at intersections","Geometric/infrastructure",[4,3,4,3,2],"Prioritize second",-1.108,-0.407,"Design (C)",["NCHRP design practitioners rate feasibility very low and impact below average — high capital cost is the dominant perception even though grade separation is the most complete safety solution.","Individual structures can be built at specific high-priority intersections; phased capital program feasible.","Usage counts and before-after pedestrian crash data at treated intersections measurable.","Consistent with Safe System principles; AASHTO and FHWA support where justified by cost-benefit.","High capital cost and long construction timeline; significant engineering and funding resources required."]],
+["Road diets on multi-lane roads <20k AADT","Geometric/infrastructure",[5,5,5,4,4],"Prioritize first",0.219,0.604,"Design (C)",["NCHRP design practitioners rate feasibility above average and impact high — road diets are the highest-impact practice in the design appendix, and the feasibility rating reflects FHWA proven countermeasure status and low implementation cost.","Quick-build implementations using paint and flex posts allow reversible pilots before permanent restriping.","Before-after crash and speed data on treated corridors straightforward to collect.","FHWA proven countermeasure with clear eligibility criteria; city DOT authority on local roads.","Restriping is low-cost and fast; permanent implementation requires resurfacing coordination."]],
+["Converting signalized intersections to single-lane roundabouts","Geometric/infrastructure",[5,4,5,3,3],"Prioritize first",-0.703,0.294,"Design (C)",["NCHRP design practitioners rate feasibility well below average but impact above average — roundabouts are well-evidenced but U.S. practitioners consistently perceive right-of-way, cost, and driver familiarity as barriers.","Conversions can be prioritized at individual intersections; phased program is standard practice.","Before-after crash type and severity data at converted intersections directly measurable and well documented nationally.","FHWA strongly endorses roundabouts; design standards clear; driver familiarity improving.","Capital-intensive construction; geometric redesign required but well within DOT capacity."]],
+["Daylighting intersections (restricting corner parking)","Geometric/infrastructure",[5,5,5,4,5],"Prioritize first",0.972,0.296,"Design (C)",["NCHRP design practitioners rate feasibility very high and impact above average — the highest-feasibility design practice in the appendix. Simple, cheap, and effective with strong peer precedent.","Single intersection implementation by painting no-parking zones; immediately reversible; zero capital cost.","Sightline improvement immediately visible; before-after pedestrian-vehicle conflicts measurable.","Consistent with parking ordinance authority; NACTO endorsed; no design standards conflict.","Requires only paint, signage, and parking enforcement notification."]],
+["Default local road lane width 10 ft","Geometric/infrastructure",[5,4,4,3,4],"Prioritize first",0.636,-0.397,"Design (C)",["NCHRP design practitioners rate feasibility above average but impact below average — practitioners accept the implementation ease but are skeptical of population-level safety effect, possibly underweighting the speed-reduction mechanism.","Can be applied to a single corridor resurfacing project as a design exception pilot.","Vehicle operating speeds on treated streets directly measurable; before-after crash data accumulates over 1-2 years.","Conflicts with AASHTO 12-foot default; requires design exception documentation.","Restriping to narrower lanes is low-cost; friction is in the design exception process."]],
+["Centerline rumble strips on undivided highways","Geometric/infrastructure",[4,5,4,5,5],"Prioritize first",1.010,0.225,"Design (C)",["NCHRP design practitioners rate feasibility highest of all design practices and impact above average — centerline rumble strips are the consensus 'easiest win' in the design category with strong evidence and zero controversy.","Standard resurfacing project add-on; no design exception needed.","Head-on crash reduction on treated segments directly measurable; FHWA performance data extensive.","FHWA proven countermeasure; fully within AASHTO standards; routine for all road programs.","Standard paving equipment installs rumble strips at minimal added cost during resurfacing."]],
+["Edge line rumble strips with bike gaps","Geometric/infrastructure",[4,5,4,5,5],"Prioritize first",0.726,-0.442,"Design (C)",["NCHRP design practitioners rate feasibility high but impact below average — the run-off-road safety value is recognized but practitioners may underweight the cyclist safety co-benefit.","Standard resurfacing project add-on; bike gaps are a simple design modification.","Run-off-road crash reduction measurable; cyclist comfort surveys document the gap benefit.","FHWA proven countermeasure; bike gap specification accepted in AASHTO and FHWA guidance.","Installed with standard equipment during resurfacing; minor layout adjustment for bike gap."]],
+["Breakaway poles","Geometric/infrastructure",[4,5,4,5,5],"Prioritize first",0.882,0.111,"Design (C)",["NCHRP design practitioners rate feasibility high and impact near average — the practice is well established and low-controversy but perceived as an incremental rather than transformative safety gain.","Specification change for any pole replacement or new installation; routine procurement.","Fixed-object crash severity data on treated corridors measurable; FHWA maintains national performance data.","AASHTO Roadside Design Guide standard; FHWA proven countermeasure; no standards conflict.","Specification change only; breakaway hardware commercially available and standard in procurement."]],
+["Pedestrian hybrid beacons on arterials with 4+ lanes","Geometric/infrastructure",[5,5,5,4,4],"Prioritize first",-0.134,-0.142,"Design (C)",["NCHRP design practitioners rate both feasibility and impact slightly below average — surprising given FHWA proven countermeasure status, possibly reflecting cost and unfamiliarity among practitioners in states with limited deployment history.","Single crossing installation feasible; FHWA proven countermeasure with clear warrants.","Driver yielding rates and pedestrian crossing compliance directly observable; crash data accumulates within 1-2 years.","FHWA proven countermeasure; MUTCD-compliant; increasing acceptance nationally.","Standard signal equipment; installation routine for DOTs with signal experience."]],
+["Employ perceptual psychologists in road design","Data & planning",[4,3,3,2,2],"Longer horizon",-0.396,-0.322,"Design (C)",["NCHRP design practitioners rate both feasibility and impact below average — this practice is outside the current disciplinary ecosystem of transportation engineering; practitioners recognize the concept but cannot operationalize it.","Could be piloted on a single corridor design project as a consultant engagement.","Outcomes of perceptually-informed design measurable but attribution to psychology input specifically is difficult.","Outside normal disciplinary composition of engineering teams; low compatibility with existing staffing and procurement norms.","Requires identifying specialized expertise not currently in the transportation engineering ecosystem."]],
+["Joint action plans with emergency services partners","Post-crash care",[4,4,4,4,4],"Prioritize first",0.264,-0.027,"Operations (D) + Post-crash (F)",["NCHRP averaged across operations and post-crash sectors: above-average feasibility but impact near zero — practitioners see this as organizationally achievable but don't credit it with direct crash prevention (it's a post-crash response intervention).","Can begin with a single corridor or event type before systemwide adoption.","Incident clearance times and secondary crash rates on treated corridors directly measurable.","Aligns with TIM program norms; FHWA has promoted TIM coordination for over a decade.","Requires inter-agency agreement and joint training; manageable with existing staff."]],
+["Traffic incident management system with clearance time tracking","Post-crash care",[4,4,4,4,4],"Prioritize first",-0.033,-0.085,"Post-crash (F)",["NCHRP post-crash practitioners rate both feasibility and impact slightly below average — the practice is recognized as useful infrastructure but secondary crash prevention is less visible to practitioners than primary crash prevention.","Can be implemented for a single incident type or corridor before system-wide rollout.","Clearance time trends immediately quantifiable; secondary crash rates on managed corridors measurable.","Consistent with FHWA TIM program standards; aligns with performance management norms.","Data collection and reporting systems manageable; investment in software and coordination required."]],
+["Train law enforcement and transportation on post-crash coord.","Post-crash care",[4,5,4,4,4],"Prioritize first",0.332,0.153,"Post-crash (F)",["NCHRP post-crash practitioners rate feasibility above average and impact above average — joint training is perceived as achievable and valuable by practitioners who work at the scene.","Training programs can be piloted with a single department before expanding.","Training completion rates and subsequent improvements in clearance time and data quality measurable.","Aligns with TIM program norms; law enforcement and transportation share interest in rapid clearance.","Training development and delivery manageable; modest investment with clear return."]],
+["Automatic collision notification (ACN) on remote rural roads","Post-crash care",[4,3,3,3,3],"Prioritize second",-0.335,0.137,"Post-crash (F)",["NCHRP post-crash practitioners rate feasibility below average and impact above average — the life-saving logic of faster rural crash detection is clear but infrastructure investment is perceived as daunting.","Requires corridor-level infrastructure investment; not a simple pilot.","Response time improvements on treated corridors measurable; survival outcome improvements require larger sample.","Aligns with post-crash care goals; technology less mature than in-vehicle ACN systems.","Infrastructure deployment requires significant capital and technical investment."]],
+["Upgrade to Next Generation 911 (NG911)","Post-crash care",[4,3,3,3,2],"Prioritize second",-0.073,0.242,"Post-crash (F)",["NCHRP post-crash practitioners rate feasibility slightly below average but impact above average — NG911 is recognized as valuable but county/regional PSAP replacement complexity suppresses feasibility.","Requires county or regional PSAP infrastructure upgrade; not a city DOT initiative.","Response time and dispatch accuracy improvements measurable after system upgrade.","Aligns with emergency services modernization; outside transportation engineering's direct domain.","Major infrastructure replacement requiring significant investment and multi-agency coordination."]],
+["UAS for route monitoring and crash response","Post-crash care",[4,3,4,3,2],"Prioritize second",-0.540,-0.187,"Post-crash (F)",["NCHRP post-crash practitioners rate feasibility well below average and impact below average — drone technology is seen as novelty rather than proven infrastructure by most practitioners.","Pilot programs for specific corridor types feasible with FAA part 107 authority.","Clearance time improvements and data quality gains from drone documentation measurable.","Growing acceptance in law enforcement; FAA regulatory framework adds complexity.","Requires trained drone pilots, equipment, and FAA compliance; not trivial for city DOTs."]],
+["ACN for collisions involving peds/cyclists/rollers","Post-crash care",[5,3,4,3,3],"Prioritize second",-0.452,0.312,"Post-crash (F)",["NCHRP post-crash practitioners rate feasibility below average but impact above average — the case for faster detection of vulnerable road user crashes is compelling but the technology is nascent.","Technology for this use case less mature than vehicle-to-vehicle ACN; limited pilot options.","Response time improvements and survival outcome data measurable but require sufficient incident volume.","Aligns with Safe System post-crash care pillar; technology standards not yet established.","Requires sensor infrastructure, communication systems, and EMS coordination."]],
+["Traffic guidance scheme (TGS) for crash events","Post-crash care",[3,4,3,4,4],"Prioritize second",0.444,-0.410,"Operations (D)",["NCHRP operations practitioners rate feasibility above average but impact below average — TGS is seen as a planning process tool rather than a safety intervention with measurable crash outcomes.","Protocols can be developed for specific corridor types before system-wide adoption.","Secondary crash rates and clearance times on corridors with established TGS measurable.","Consistent with TIM program norms; aligns with engineering and law enforcement partner values.","Protocol development requires inter-agency coordination but no capital investment."]],
+["Network-comprehensive winter road clearance","Signals & operations",[4,4,4,4,4],"Prioritize first",0.025,-0.073,"Operations (D)",["NCHRP operations practitioners rate feasibility near average and impact slightly below — extending clearance to active transportation networks is recognized as equitable but practitioners underweight the crash and fall prevention benefit relative to motorist-focused maintenance.","Can be piloted on a high-priority active transportation corridor before expanding.","Before-after pedestrian and cyclist fall incidents and crash data on treated routes measurable.","Aligns with Complete Streets operational commitment; conflict with budget norms in vehicle-first agencies.","Requires equipment adaptation and route planning; manageable for cities with existing winter programs."]],
+["Extended clearance intervals for cyclists at signals","Signals & operations",[5,5,5,4,5],"Prioritize first",-0.145,-0.334,"Operations (D)",["NCHRP operations practitioners rate both feasibility and impact below average — a perceptual gap worth noting, as this is one of the simplest and cheapest signal interventions available; practitioners may not have considered it as a discrete safety practice.","Single intersection timing adjustment; zero capital cost; immediately reversible.","Cyclist clearing rates and conflict counts at treated intersections directly observable.","MUTCD permits engineering judgment on clearance intervals; fully within signal engineer's authority.","Signal retiming only; no hardware changes required."]],
+["Longer green times for cyclists at shared path crossings","Signals & operations",[5,5,5,4,5],"Prioritize first",0.338,-0.236,"Operations (D)",["NCHRP operations practitioners rate feasibility above average but impact below average — again suggesting that practitioners underestimate the collision-reduction value of timing adjustments for cyclists.","Single crossing timing adjustment; immediately reversible; zero cost beyond staff time.","Cyclist clearing rates and vehicle-cyclist conflicts at treated crossings directly observable.","MUTCD supports engineering judgment; consistent with bicycle-friendly signal timing guidance.","Signal retiming only; no hardware or capital investment required."]],
+["Exclusive signal phase for peds in high-volume areas (scramble)","Signals & operations",[5,5,5,4,4],"Prioritize first",0.067,0.286,"Operations (D)",["NCHRP operations practitioners rate feasibility near average and impact above average — the scramble phase is increasingly familiar and its impact is well perceived, but cycle length and throughput concerns moderate the feasibility rating.","Single intersection implementation common as a pilot.","Pedestrian-vehicle conflict counts before and after directly measurable.","MUTCD-compliant; increasingly common in U.S. cities; NACTO endorsed.","Signal retiming with minor hardware consideration; manageable for any city signal engineer."]],
+["Extended clearance for passively detected peds at signals","Signals & operations",[5,5,5,4,5],"Prioritize first",-0.046,-0.053,"Operations (D)",["NCHRP operations practitioners rate both feasibility and impact near zero — one of several signal timing practices where practitioners seem to undervalue the impact relative to the ease of implementation.","Single intersection detector installation and timing adjustment; phased rollout standard.","Pedestrian clearing rates and crossing compliance at treated intersections directly measurable.","MUTCD-compliant; aligns with ADA and pedestrian safety values; FHWA endorsed.","Detector technology commercially available and routinely specified."]],
+["Combine passive ped detection with APS for low-vision peds","Signals & operations",[5,4,4,4,4],"Prioritize first",-0.236,0.008,"Operations (D)",["NCHRP operations practitioners rate feasibility below average and impact near zero — ADA compliance creates institutional push but practitioners may not isolate the crash-prevention benefit from the accessibility benefit.","Single intersection installation; APS retrofits are a common project type.","APS usage rates and pedestrian compliance measurable; ADA complaint rates can be tracked.","ADA compliance requirements create institutional push; aligns with both accessibility and safety values.","APS hardware commercially available and well specified; detector integration adds modest complexity."]],
+["Signal progression for emergency vehicles","Signals & operations",[4,4,4,4,4],"Prioritize first",0.134,0.039,"Operations (D)",["NCHRP operations practitioners rate feasibility and impact both near average — preemption is well understood and accepted but not seen as a transformative safety intervention.","Can be implemented on specific response corridors before network-wide rollout.","Response time improvements on treated corridors measurable.","Aligns with emergency services partnership goals; FHWA supports TSP and preemption.","Technology commercially available; routine signal upgrade with EMS coordination."]],
+["Variable speed limits in school zones","Speed management",[5,5,5,4,4],"Prioritize first",-0.332,0.162,"Operations (D)",["NCHRP operations practitioners rate feasibility below average but impact above average — political and community support is strong but procurement and operational complexity suppress feasibility perception.","Single school zone installation is a natural pilot; phased rollout by school is standard.","Vehicle speeds during active school zone periods directly measurable; crash data accumulates within 1-2 years.","Strong political and community support; MUTCD-compliant; FHWA and state DOTs endorse school zone speed management.","Electronic sign systems commercially available and routinely installed."]],
+["Driving Safety Support Systems (DSSS)","Vehicle technology",[3,2,3,2,2],"Longer horizon",-0.546,-0.039,"Operations (D)",["NCHRP operations practitioners rate both feasibility and impact below average — DSSS is recognized as conceptually interesting but the U.S. infrastructure and regulatory ecosystem for it does not yet exist.","Requires vehicle equipment and roadside infrastructure not yet standardized in the U.S.","Performance in U.S. conditions not well documented; large-scale deployment required to measure outcomes.","Conflicts with current vehicle standards; lacks federal regulatory push needed for adoption.","Requires coordination between automotive industry, federal regulators, and infrastructure providers."]],
+["Variable speed limits near traffic incidents","Speed management",[4,4,4,4,4],"Prioritize first",-0.579,0.169,"Operations (D)",["NCHRP operations practitioners rate feasibility below average but impact above average — secondary crash prevention value recognized but DMS infrastructure investment suppresses feasibility for agencies without existing systems.","Single freeway corridor pilot with existing DMS infrastructure is feasible.","Secondary crash rates and speed compliance upstream of incidents on treated corridors measurable.","Aligns with TIM program goals; FHWA endorses VSL as a freeway management tool.","DMS infrastructure exists on many freeways; integration with incident detection systems manageable."]],
+["Variable speed limits in adverse weather","Speed management",[4,4,4,4,4],"Prioritize first",-0.346,-0.372,"Operations (D)",["NCHRP operations practitioners rate both feasibility and impact below average — weather-responsive VSL is operationally complex and practitioners may underestimate the crash reduction benefit in adverse conditions.","Single corridor pilot with existing DMS infrastructure is feasible.","Speed compliance and weather-related crash rates on treated corridors measurable.","FHWA endorses weather-responsive VSL; consistent with existing freeway management frameworks.","Requires DMS infrastructure and weather detection integration; manageable for corridors with existing equipment."]],
+["Variable speed limits at night in alcohol-serving districts","Speed management",[4,4,4,3,3],"Prioritize second",-0.569,-0.572,"Operations (D)",["NCHRP operations practitioners rate both feasibility and impact below average — the targeted nighttime alcohol district application is a novel practice with limited precedent, and legal authority for time-varying limits is not universal.","Can be piloted on a single entertainment district corridor with temporary or permanent signage.","Speed compliance and pedestrian crash rates during treated time windows measurable.","Requires city authority over speed limits; may need state approval for certain road types.","Requires legal authority for time-varying speed limits; not all states permit this."]],
+["Remove dangerous roadside objects (clear zone)","Geometric/infrastructure",[4,5,4,4,5],"Prioritize first",0.291,0.597,"Operations (D)",["NCHRP operations practitioners rate feasibility above average and impact high — clear zone management is the highest-impact practice in the operations appendix, and practitioners recognize it as achievable within routine maintenance workflows.","Can be applied to any resurfacing or maintenance project as a standard audit step.","Fixed-object crash rates on treated corridors before and after directly measurable.","AASHTO Roadside Design Guide standard; FHWA proven countermeasure; fully consistent with existing engineering practice.","Integrated into routine maintenance and resurfacing workflow; requires audit step and minor specification work."]],
+["Integrate asset management with crash analysis","Data & planning",[5,4,4,4,4],"Prioritize first",0.062,0.155,"Operations (D)",["NCHRP operations practitioners rate feasibility near average and impact above average — the analytical logic is recognized as sound and the institutional infrastructure (asset management systems, crash databases) already exists; integration is the missing step.","Can begin with a single asset category before integrating multiple types.","Correlation between asset condition scores and crash rates on treated vs. untreated assets measurable over time.","Aligns with performance management frameworks already in use at most DOTs.","Requires GIS integration of asset condition and crash databases; feasible for DOTs with basic analytical capacity."]],
+["Incorporate drainage/furniture/vegetation in asset management","Data & planning",[4,4,4,4,4],"Prioritize first",-0.056,-0.162,"Operations (D)",["NCHRP operations practitioners rate both feasibility and impact slightly below average — expanding asset management scope is recognized as logical but practitioners see limited direct safety evidence for vegetation and drainage specifically.","Can be added to existing asset management programs incrementally by category.","Crash rates at locations with known asset deficiencies before and after treatment measurable.","Consistent with comprehensive asset management principles; aligns with existing maintenance culture.","Expands existing inventory systems; field data collection but no new technology required."]],
+["Crash risk in resurfacing prioritization","Data & planning",[5,5,5,4,5],"Prioritize first",0.418,0.327,"Operations (D)",["NCHRP operations practitioners rate both feasibility and impact above average — this is perceived as a high-value, low-cost integration of existing workflows. Every agency resurfaces roads and has crash data; the analytical step is the missing link.","Can be implemented in the next resurfacing cycle; requires only GIS overlay of crash and pavement condition data.","Crash rate changes on prioritized vs. non-prioritized resurfacing segments directly measurable before and after.","Consistent with data-driven maintenance culture; aligns with HSIP evidence-based investment requirements.","GIS overlay of existing crash and pavement databases; technically straightforward for DOTs with basic analytical capacity."]],
+["Active/passive equipment maintenance and replacement system","Data & planning",[4,5,4,4,4],"Prioritize first",0.166,-0.127,"Operations (D)",["NCHRP operations practitioners rate feasibility above average but impact below average — maintenance systems are seen as operationally manageable but practitioners don't strongly credit them with crash prevention per se.","Can be implemented for a single asset type before expanding; work order systems are a standard municipal tool.","Equipment failure rates and time-to-repair trackable; crash rates at failed vs. maintained equipment locations measurable.","Consistent with existing operations and maintenance culture; aligns with asset management norms.","Work order and inspection software commercially available; operationally manageable for any city DOT."]],
+["Detailed transportation asset condition inventory","Data & planning",[4,5,4,4,4],"Prioritize first",-0.040,-0.002,"Operations (D)",["NCHRP operations practitioners rate feasibility near average and impact near zero — comprehensive inventory is recognized as foundational but practitioners see it as a prerequisite rather than a safety intervention in itself.","Can begin with a single asset category or geographic area before expanding.","Inventory completeness and condition data quality measurable; downstream maintenance efficiency improvements trackable.","Consistent with FHWA asset management requirements and performance management culture.","GIS and mobile data collection tools make inventory manageable; scales with staff capacity."]],
+["Saturation patrols for impaired driving","Enforcement",[4,4,4,4,4],"Prioritize first",0.157,0.287,"Enforcement (E)",["NCHRP enforcement practitioners rate both feasibility and impact above average; high-visibility enforcement is a well-established, evidence-based tool with clear operational pathways.","Deployable on specific corridors or time windows; naturally bounded by budget.","DUI arrest rates and crash data on treated corridors trackable.","Aligns with enforcement culture; fits naturally into SHSP enforcement programs.","Operationally straightforward; inter-agency coordination but no new technology required."]]
+];
 
 function render(){
   const q=document.getElementById("search").value.toLowerCase();
   const cat=document.getElementById("catFilter").value;
   const tier=document.getElementById("tierFilter").value;
   const sortKey=document.getElementById("sortCol").value;
-  const keyMap={composite:7,ra:2,tr:3,ob:4,co:5,lc:6};
-  const idx=keyMap[sortKey];
 
   let rows=data.filter(r=>{
     if(q&&!r[0].toLowerCase().includes(q))return false;
     if(cat&&r[1]!==cat)return false;
-    if(tier&&r[8]!==tier)return false;
+    if(tier&&r[3]!==tier)return false;
     return true;
-  }).sort((a,b)=>b[idx]-a[idx]);
+  }).sort((a,b)=>{
+    if(sortKey==="composite") return total(b)-total(a);
+    if(sortKey==="feas") return (b[4]??-99)-(a[4]??-99);
+    if(sortKey==="impact") return (b[5]??-99)-(a[5]??-99);
+    const i=parseInt(sortKey);
+    return b[2][i]-a[2][i];
+  });
 
   document.getElementById("countLabel").textContent=rows.length+" of "+data.length+" practices";
-
   const tbody=document.getElementById("tbody");
   tbody.innerHTML="";
-  rows.forEach(r=>{
-    const scores=[r[2],r[3],r[4],r[5],r[6]];
-    const tr=document.createElement("tr");
-    tr.innerHTML=`
+
+  rows.forEach((r,ri)=>{
+    const t=total(r);
+    const dataRow=document.createElement("tr");
+    dataRow.className="data-row";
+    dataRow.innerHTML=`
       <td class="practice-name">${r[0]}</td>
       <td><span class="cat-badge">${r[1]}</span></td>
-      ${scores.map((s,i)=>`<td class="score-cell"><span title="${["RA","TR","OB","CO","LC"][i]}:${s}/5">${s}</span></td>`).join("")}
-      <td class="composite-cell" style="color:${scoreColor(r[7])}">${r[7]}</td>
-      <td><span class="pill ${tierColor[r[8]]}">${r[8]}</span></td>
-    `;
-    tbody.appendChild(tr);
+      ${r[2].map((v,i)=>`<td class="score-cell" title="${DN[i]}: ${v}/5">${v}</td>`).join("")}
+      <td class="composite-cell" style="color:${scoreColor(t)}">${t}</td>
+      <td><span class="pill ${tierColor[r[3]]}">${r[3]}</span></td>
+      <td>${zbarMini(r[4],"#185fa5")}</td>
+      <td>${zbarMini(r[5],"#378ADD")}</td>`;
+
+    const ratRow=document.createElement("tr");
+    ratRow.className="rationale-row hidden";
+    const td=document.createElement("td");
+    td.colSpan=11;
+    td.innerHTML=`<div class="rationale-inner">
+      <div class="rat-title">${r[0]} <span class="src-tag">${r[6]}</span></div>
+      <div class="rat-sections">
+        <div>
+          <div style="font-size:11px;font-weight:500;color:var(--text2);margin-bottom:6px">Rogers attribute scores &mdash; U.S. road safety practitioner perspective</div>
+          <div class="rat-rogers-grid">${r[7].map((text,i)=>`
+            <div class="rat-card">
+              <div class="rat-label"><span class="factor-sq" style="background:${DC[i]}"></span>${DN[i]}</div>
+              <div class="rat-score" style="color:${DC[i]}">${r[2][i]}/5</div>
+              <div class="rat-text">${text}</div>
+            </div>`).join("")}
+          </div>
+        </div>
+        <div class="rat-nchrp">
+          <div class="rat-nchrp-title">NCHRP Report 1135 practitioner ratings</div>
+          ${zbarFull(r[4],"Feasibility","#185fa5")}
+          ${zbarFull(r[5],"Impact","#378ADD")}
+          <div class="rat-nchrp-src">Source: ${r[6]}. Z-scores standardized within appendix (mean=0, SD=1). ${r[6].includes("+")?"Averaged across sectors.":""}</div>
+        </div>
+      </div>
+    </div>`;
+    ratRow.appendChild(td);
+
+    dataRow.addEventListener("click",()=>{
+      const open=!ratRow.classList.contains("hidden");
+      dataRow.classList.toggle("open-row",!open);
+      ratRow.classList.toggle("hidden",open);
+    });
+
+    tbody.appendChild(dataRow);
+    tbody.appendChild(ratRow);
   });
 
   const sumEl=document.getElementById("summary");
-  const allSorted=[...data].sort((a,b)=>b[7]-a[7]);
-  const tiers=["Seed first","Seed second","Longer horizon"];
+  const allSorted=[...data].sort((a,b)=>total(b)-total(a));
   sumEl.innerHTML="";
-  tiers.forEach(t=>{
-    const group=allSorted.filter(r=>r[8]===t);
+  ["Prioritize first","Prioritize second","Longer horizon"].forEach(t=>{
+    const group=allSorted.filter(r=>r[3]===t);
     if(!group.length)return;
-    sumEl.innerHTML+=`<div class="tier-header">${t} — ${group.length} practices</div>`;
+    sumEl.innerHTML+=`<div class="tier-header">${t} &mdash; ${group.length} practices</div>`;
     group.forEach(r=>{
-      const pct=r[7]/25*100;
+      const tot=total(r);
       sumEl.innerHTML+=`<div class="sum-row">
         <span class="sum-name">${r[0]}</span>
-        <div class="sum-track"><div class="sum-fill" style="width:${pct}%;background:${fillColors[r[8]]}"></div></div>
-        <span class="sum-score">${r[7]}/25</span>
-      </div>`;
+        <div class="sum-track"><div class="sum-fill" style="width:${tot/25*100}%;background:${fillColors[r[3]]}"></div></div>
+        <span class="sum-score">${tot}/25</span></div>`;
     });
   });
 }
-render();
-</script>
-</body>
-</html>
+
+function total(r){ return r[2].reduce((a,b)=>a+b,0); }
 render();
 </script>
 </body>
