@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rogers Diffusion Innovation Scoring — 75 Safety Practices</title>
+<title>Rogers Innovation Scoring — 75 Safety Practices</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -108,7 +108,7 @@
 <body>
 <div class="container">
   <h1>Rogers Innovation Scoring &mdash; 75 Road Safety Practices</h1>
-  <p class="byline">Seth LaJeunesse, UNC Highway Safety Research Center &nbsp;&middot;&nbsp; Design developed with Claude (Anthropic)</p>
+  <p class="byline">Seth LaJeunesse, UNC Highway Safety Research Center &nbsp;&middot;&nbsp; Analysis developed with Claude (Anthropic)</p>
 
   <p class="intro">
     Why do some proven road safety practices spread quickly while others stall for decades despite strong evidence?
@@ -126,7 +126,7 @@
   <div class="factors-grid">
     <div class="factor-card">
       <div class="factor-label"><span class="factor-sq" style="background:#1D9E75"></span>Relative advantage</div>
-      <div class="factor-desc">Is this practice perceived as meaningfully better than what it replaces? Stronger perceived benefit — especially in professional recognition, and to a lesser extent, in safety outcomes, liability protection — accelerates adoption.</div>
+      <div class="factor-desc">Is this practice perceived as meaningfully better than what it replaces? Stronger perceived benefit — in safety outcomes, liability protection, or professional recognition — accelerates adoption.</div>
     </div>
     <div class="factor-card">
       <div class="factor-label"><span class="factor-sq" style="background:#7F77DD"></span>Trialability</div>
@@ -296,9 +296,9 @@ function zbarFull(z, label, color){
 const data=[
 // [name, cat, [RA,TR,OB,CO,LC], tier, feas_z, impact_z, nchrp_src, [rationale x5]]
 // --- BEHAVIORAL/REGULATORY ---
-["Lowering BAC limit 0.08\u20190.05","Behavioral/regulatory",[3,2,3,2,2],"Longer horizon",-0.146,-0.463,"Policy (A)",["Strong international evidence but U.S. practitioners perceive this as politically infeasible at present; the NCHRP data confirm below-average impact perception, possibly because practitioners see impaired driving as already over-addressed relative to infrastructure.","State legislative action required across all 50 states; no sub-state pilot pathway exists.","Crash attribution to BAC threshold change specifically is difficult amid other confounders; multi-year lag before outcomes stabilize.","Conflicts with entrenched U.S. 0.08 norm and faces well-organized industry opposition; low perceived compatibility with current political environment.","Requires coordinated legislative campaigns in every state simultaneously; far beyond practitioner agency capacity."]],
+["Lowering BAC limit from 0.08 to 0.05","Behavioral/regulatory",[3,2,3,2,2],"Longer horizon",-0.146,-0.463,"Policy (A)",["Strong international evidence but U.S. practitioners perceive this as politically infeasible at present; the NCHRP data confirm below-average impact perception, possibly because practitioners see impaired driving as already over-addressed relative to infrastructure.","State legislative action required across all 50 states; no sub-state pilot pathway exists.","Crash attribution to BAC threshold change specifically is difficult amid other confounders; multi-year lag before outcomes stabilize.","Conflicts with entrenched U.S. 0.08 norm and faces well-organized industry opposition; low perceived compatibility with current political environment.","Requires coordinated legislative campaigns in every state simultaneously; far beyond practitioner agency capacity."]],
 ["Extending GDL to all novice drivers regardless of age","Behavioral/regulatory",[3,2,3,2,2],"Longer horizon",0.136,-0.258,"Policy (A)",["Evidence for older novice drivers is thinner than for young drivers; practitioners recognize the logic but the evidence base is weaker, reflected in below-average NCHRP impact score.","State DMV and legislative action only; no agency-level trial option.","Crash rate changes for older novice drivers would take years to observe and require careful confounding controls.","Challenges adult autonomy norms; moderate professional support but significant public opposition anticipated.","Multi-agency state legislative process; beyond practitioner scope."]],
-["Driver license renewal with on-road test every 5\u201310 yrs","Behavioral/regulatory",[2,1,2,2,2],"Longer horizon",-0.477,-0.295,"Policy (A)",["Evidence of crash reduction from renewal testing is limited; NCHRP practitioners rated this below average on both feasibility and impact.","No sub-state pilot pathway; purely a state DMV and legislative matter.","Outcomes would lag years behind policy change with difficult attribution.","Conflicts with licensure-as-right norms; significant voter and political opposition.","Requires new DMV infrastructure and legal changes in every state."]],
+["Driver license renewal with on-road test every 5 to 10 yrs","Behavioral/regulatory",[2,1,2,2,2],"Longer horizon",-0.477,-0.295,"Policy (A)",["Evidence of crash reduction from renewal testing is limited; NCHRP practitioners rated this below average on both feasibility and impact.","No sub-state pilot pathway; purely a state DMV and legislative matter.","Outcomes would lag years behind policy change with difficult attribution.","Conflicts with licensure-as-right norms; significant voter and political opposition.","Requires new DMV infrastructure and legal changes in every state."]],
 ["Speed governors in municipal fleet vehicles","Vehicle technology",[4,5,4,4,4],"Prioritize first",0.592,-0.712,"Policy (A)",["City liability reduction is a compelling advantage; practitioners directly control fleet procurement. NCHRP feasibility is above average but impact is rated low, suggesting practitioners see it as easy to do but limited in population-level effect.","City can pilot on a subset of fleet vehicles with no external approval required.","Telematics data makes speed behavior directly observable; incidents involving fleet vehicles are tracked.","Aligns with fleet risk management culture; no external standards conflict.","Technically and administratively managed within existing fleet programs."]],
 ["Seat belt interlocks in new vehicles","Vehicle technology",[4,2,3,3,2],"Longer horizon",-0.055,0.150,"Policy (A)",["High perceived safety value but NCHRP practitioners rated feasibility slightly below average; federal rulemaking dependency is the binding constraint.","Requires NHTSA rulemaking and OEM compliance; no practitioner-level pilot exists.","Population-level seatbelt use rates shift slowly; national rather than local measurement.","Philosophically consistent with Safe System but faces industry and autonomy opposition.","Multi-year federal regulatory process outside any practitioner agency's scope."]],
 ["Vehicle size maximums in high-ped areas","Behavioral/regulatory",[4,2,3,2,2],"Longer horizon",-0.666,-0.486,"Policy (A)",["Mechanistically clear advantage for pedestrian safety but NCHRP practitioners rated both feasibility and impact below average; commercial trucking conflicts dominate the perception.","Requires state or federal ordinance; city engineers cannot unilaterally restrict vehicle dimensions.","Compliance monitoring would require new enforcement infrastructure.","Conflicts with trucking industry norms and federal vehicle standards.","Legally complex multi-jurisdictional coordination required."]],
